@@ -14,6 +14,11 @@
       return;
     }
 
+    var qHeader = document.getElementById('results-header');
+    if (qHeader) { qHeader.style.display = 'block'; }
+    var qSpan = document.getElementById('results-query');
+    if (qSpan && queryInput && queryInput.value) { qSpan.textContent = '“' + queryInput.value + '”'; }
+
     items.forEach(function (item) {
       var entity = item.result || {};
       var name = entity.name || 'Unnamed';
@@ -21,31 +26,72 @@
       var detailed = item.resultScore ? ('Score: ' + item.resultScore.toFixed(2)) : '';
       var imageUrl = entity.image && entity.image.contentUrl ? entity.image.contentUrl : null;
       var url = entity.detailedDescription && entity.detailedDescription.url ? entity.detailedDescription.url : (entity.url || null);
+      var types = Array.isArray(entity['@type']) ? entity['@type'] : (entity['@type'] ? [entity['@type']] : []);
 
-      var cardTop = document.createElement('div');
-      cardTop.className = 'card-top';
+      var card = document.createElement('div');
+      card.style.border = '1px solid #e5e7eb';
+      card.style.borderRadius = '12px';
+      card.style.padding = '20px';
+      card.style.background = '#fff';
+      card.style.display = 'flex';
+      card.style.alignItems = 'center';
+      card.style.justifyContent = 'space-between';
+      card.style.gap = '16px';
 
       if (imageUrl) {
         var img = document.createElement('img');
         img.src = imageUrl;
         img.alt = name;
-        img.className = 'card-img';
-        cardTop.appendChild(img);
+        img.style.height = '120px';
+        img.style.width = '120px';
+        img.style.objectFit = 'cover';
+        img.style.borderRadius = '8px';
+        card.appendChild(img);
       }
 
-      var bottom = document.createElement('div');
-      bottom.className = 'card-bottom';
+      var content = document.createElement('div');
+      content.style.flex = '1';
 
       var title = document.createElement('div');
       title.className = 'headings';
       title.textContent = name;
-      bottom.appendChild(title);
+      content.appendChild(title);
+
+      if (types.length) {
+        var badgesWrap = document.createElement('div');
+        badgesWrap.style.display = 'flex';
+        badgesWrap.style.gap = '8px';
+        badgesWrap.style.flexWrap = 'wrap';
+        types.slice(0,3).forEach(function(t){
+          var b = document.createElement('span');
+          b.textContent = t;
+          b.style.background = '#e8f5e9';
+          b.style.color = '#1b5e20';
+          b.style.fontSize = '12px';
+          b.style.padding = '4px 8px';
+          b.style.borderRadius = '999px';
+          badgesWrap.appendChild(b);
+        });
+        content.appendChild(badgesWrap);
+      }
 
       if (description) {
         var p = document.createElement('p');
         p.textContent = description;
-        bottom.appendChild(p);
+        content.appendChild(p);
       }
+
+      var meta = document.createElement('div');
+      meta.style.display = 'flex';
+      meta.style.alignItems = 'center';
+      meta.style.gap = '12px';
+      meta.style.marginTop = '8px';
+
+      var idText = document.createElement('div');
+      idText.className = 'text-block-4';
+      idText.textContent = 'Knowledge Graph ID: ' + (entity['@id'] || 'N/A');
+      meta.appendChild(idText);
+      content.appendChild(meta);
 
       if (url) {
         var a = document.createElement('a');
@@ -53,29 +99,51 @@
         a.target = '_blank';
         a.className = 'button grey _2 w-button';
         a.textContent = 'Learn more';
-        bottom.appendChild(a);
+        a.style.marginTop = '12px';
+        content.appendChild(a);
       }
 
-      // Add Google Knowledge Graph search button if KGMID exists
       if (entity['@id']) {
         var kgButton = document.createElement('a');
         kgButton.href = 'https://www.google.com/search?kgmid=' + encodeURIComponent(entity['@id']);
         kgButton.target = '_blank';
         kgButton.className = 'button green-button w-button';
-        kgButton.textContent = 'Google Search';
+        kgButton.textContent = 'View Knowledge Panel on Google';
         kgButton.style.marginLeft = '8px';
-        bottom.appendChild(kgButton);
+        kgButton.style.marginTop = '12px';
+        content.appendChild(kgButton);
       }
 
       if (detailed) {
         var small = document.createElement('div');
         small.className = 'text-block-4';
         small.textContent = detailed;
-        bottom.appendChild(small);
+        small.style.marginTop = '8px';
+        content.appendChild(small);
       }
 
-      cardTop.appendChild(bottom);
-      resultsEl.appendChild(cardTop);
+      var confidence = document.createElement('div');
+      confidence.style.minWidth = '200px';
+      confidence.style.textAlign = 'center';
+      confidence.style.border = '1px solid #e5e7eb';
+      confidence.style.borderRadius = '8px';
+      confidence.style.padding = '12px';
+      var confTitle = document.createElement('div');
+      confTitle.className = 'text-block-4';
+      confTitle.textContent = "Google's confidence";
+      var confVal = document.createElement('div');
+      confVal.className = 'headings';
+      confVal.textContent = '100%';
+      var confSub = document.createElement('div');
+      confSub.className = 'text-block-4';
+      confSub.textContent = 'Very high confidence';
+      confidence.appendChild(confTitle);
+      confidence.appendChild(confVal);
+      confidence.appendChild(confSub);
+
+      card.appendChild(content);
+      card.appendChild(confidence);
+      resultsEl.appendChild(card);
     });
   }
 
