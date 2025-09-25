@@ -190,8 +190,10 @@
   }
 
   if (form && queryInput) {
-    form.addEventListener('submit', function () {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent default form submission
       var q = (queryInput.value || '').trim();
+      console.log('Searching for:', q); // Debug log
       if (q) {
         searchKG(q);
       }
