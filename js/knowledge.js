@@ -25,8 +25,16 @@
       var description = entity.description || '';
       var detailed = item.resultScore ? ('Score: ' + item.resultScore.toFixed(2)) : '';
       var imageUrl = entity.image && entity.image.contentUrl ? entity.image.contentUrl : null;
-      var url = entity.detailedDescription && entity.detailedDescription.url ? entity.detailedDescription.url : (entity.url || null);
+      var url = entity.detailedDescription && entity.detailedDescription.url ? entity.detailedDescription.url : null;
       var googleSearchUrl = entity.url || null; // This is the Google search URL for the entity
+      
+      // Debug logging
+      console.log('Entity URLs:', {
+        detailedDescriptionUrl: entity.detailedDescription && entity.detailedDescription.url,
+        entityUrl: entity.url,
+        finalUrl: url,
+        googleSearchUrl: googleSearchUrl
+      });
       var types = Array.isArray(entity['@type']) ? entity['@type'] : (entity['@type'] ? [entity['@type']] : []);
 
       var card = document.createElement('div');
@@ -104,17 +112,16 @@
         content.appendChild(a);
       }
 
-      // Use the Google search URL from the API response
-      if (googleSearchUrl) {
-        var kgButton = document.createElement('a');
-        kgButton.href = googleSearchUrl;
-        kgButton.target = '_blank';
-        kgButton.className = 'button green-button w-button';
-        kgButton.textContent = 'View Knowledge Panel on Google';
-        kgButton.style.marginLeft = '8px';
-        kgButton.style.marginTop = '12px';
-        content.appendChild(kgButton);
-      }
+      // Use the Google search URL from the API response, or create one if not available
+      var finalGoogleUrl = googleSearchUrl || 'https://www.google.com/search?q=' + encodeURIComponent(name);
+      var kgButton = document.createElement('a');
+      kgButton.href = finalGoogleUrl;
+      kgButton.target = '_blank';
+      kgButton.className = 'button green-button w-button';
+      kgButton.textContent = 'View Knowledge Panel on Google';
+      kgButton.style.marginLeft = '8px';
+      kgButton.style.marginTop = '12px';
+      content.appendChild(kgButton);
 
       if (detailed) {
         var small = document.createElement('div');
