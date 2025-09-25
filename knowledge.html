@@ -114,12 +114,14 @@
         <div class="logo-section" style="margin-bottom: 40px;">
           <img src="images/Group-47740.svg" alt="1st Impression" style="height: 60px; margin-bottom: 20px;">
         </div>
-        <h1 class="main-title" style="font-size: 4rem; font-weight: 700; color: #2c2c2c; margin: 0 0 20px; line-height: 1.1;">
-          Knowledge Graph Explorer
-        </h1>
-        <p class="subtitle" style="font-size: 1.2rem; color: #666; margin: 0;">
-          by <strong>1st Impression</strong>
-        </p>
+        <div style="position: relative; display: inline-block;">
+          <h1 class="main-title" style="font-size: 4rem; font-weight: 700; color: #2c2c2c; margin: 0; line-height: 1.1;">
+            Knowledge Graph Explorer
+          </h1>
+          <p class="subtitle" style="position: absolute; bottom: -10px; right: 0; font-size: 1rem; color: #666; margin: 0; white-space: nowrap;">
+            by <img src="images/Group-47740.svg" alt="1st Impression" style="height: 16px; vertical-align: middle; margin-left: 4px;">
+          </p>
+        </div>
       </div>
 
       <!-- Search Interface -->
@@ -172,11 +174,15 @@
       </div>
 
       <!-- Warning Section -->
-      <div class="warning-section" style="background: #fff3cd; border: 2px solid #ffeaa7; border-radius: 15px; padding: 30px; margin: 60px auto 0; max-width: 800px; text-align: center;">
+      <div class="warning-section" style="margin: 60px auto 0; max-width: 800px; text-align: center;">
         <h3 style="color: #e74c3c; font-size: 1.8rem; font-weight: 700; margin: 0 0 15px;">WARNING</h3>
-        <p style="color: #2c2c2c; font-size: 1.1rem; line-height: 1.5; margin: 0; font-weight: 600;">
+        <p style="color: #2c2c2c; font-size: 1.1rem; line-height: 1.5; margin: 0 0 30px; font-weight: 600;">
           Consult with an SEO professional before attempting to build one on your own or hiring a 'cost-effective' service provider you found on a freelance site.
         </p>
+        <!-- CTA Button -->
+        <a href="https://calendar.app.google/D2WoiU27dQKDwbFv6" target="_blank" style="display: inline-block; background: #4285f4; border: 2px solid #ffffff; border-radius: 15px; padding: 20px 40px; font-size: 1.2rem; font-weight: 600; color: #ffffff; text-decoration: none; transition: all 0.3s ease;">
+          Book a Free Consultation
+        </a>
       </div>
     </div>
   </section>
@@ -193,44 +199,40 @@
     </div>
   </section>
 
+  <!-- Rainbow Separator -->
+  <div style="width: 100%; height: 4px; background: linear-gradient(90deg, #4285f4 0%, #ea4335 25%, #fbbc05 50%, #34a853 75%, #4285f4 100%);"></div>
+
   <!-- Footer Section -->
-  <section class="footer" style="background: #2c2c2c; color: #ffffff; padding: 80px 0 40px;">
+  <section class="footer" style="background: #ffffff; color: #2c2c2c; padding: 60px 0 40px;">
     <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
       <!-- Footer Content -->
-      <div class="footer-content" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 60px; flex-wrap: wrap; gap: 40px;">
+      <div class="footer-content" style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; flex-wrap: wrap; gap: 40px;">
         <!-- Logo and Slogan -->
         <div class="footer-brand" style="display: flex; align-items: center; gap: 20px;">
           <img src="images/Group-47740.svg" alt="1st Impression" style="height: 50px;">
           <div class="footer-text">
-            <div class="footer-slogan" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 10px;">Reinventing the 1st impression.</div>
-            <div class="footer-copyright" style="font-size: 0.9rem; color: #ccc;">
+            <div class="footer-slogan" style="font-size: 1.5rem; font-weight: 600; margin-bottom: 10px; color: #2c2c2c;">Reinventing the 1st impression.</div>
+            <div class="footer-copyright" style="font-size: 0.9rem; color: #666;">
               © 2025 -- 1STIMPRESSION.COM -- ALL RIGHTS RESERVED
             </div>
           </div>
         </div>
 
-        <!-- Navigation Buttons -->
-        <div class="footer-nav" style="display: flex; gap: 20px; flex-wrap: wrap;">
-          <a href="index.html" class="footer-btn" style="background: #f4f4f4; border: 3px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 15px 30px; font-size: 1rem; font-weight: 600; color: #2c2c2c; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-            Home
-          </a>
-          <a href="index.html#contact" class="footer-btn" style="background: #f4f4f4; border: 3px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 15px 30px; font-size: 1rem; font-weight: 600; color: #2c2c2c; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease;">
-            Free audit
-          </a>
-          <a href="index.html#contact" class="footer-btn" style="background: #f4f4f4; border: 3px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 15px 30px; font-size: 1rem; font-weight: 600; color: #2c2c2c; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+        <!-- Navigation Buttons Grid -->
+        <div class="footer-nav" style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+          <a href="index.html#contact" class="footer-btn" style="background: #f4f4f4; border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 20px; font-size: 0.9rem; font-weight: 600; color: #2c2c2c; text-decoration: none; text-align: center; transition: all 0.3s ease;">
             Book a call
           </a>
-          <a href="index.html#contact" class="footer-btn" style="background: #f4f4f4; border: 3px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 15px 30px; font-size: 1rem; font-weight: 600; color: #2c2c2c; text-decoration: none; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease;">
+          <a href="index.html#contact" class="footer-btn" style="background: #f4f4f4; border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 20px; font-size: 0.9rem; font-weight: 600; color: #2c2c2c; text-decoration: none; text-align: center; transition: all 0.3s ease;">
             Partner with us
           </a>
+          <a href="index.html#contact" class="footer-btn" style="background: #f4f4f4; border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 20px; font-size: 0.9rem; font-weight: 600; color: #2c2c2c; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+            Free audit
+          </a>
+          <a href="index.html" class="footer-btn" style="background: #f4f4f4; border: 2px solid #e0e0e0; border-radius: 8px; padding: 12px 20px; font-size: 0.9rem; font-weight: 600; color: #2c2c2c; text-decoration: none; text-align: center; transition: all 0.3s ease;">
+            Home
+          </a>
         </div>
-      </div>
-
-      <!-- CTA Section -->
-      <div class="footer-cta" style="text-align: center; background: #4285f4; border-radius: 15px; padding: 40px; margin-bottom: 40px;">
-        <a href="https://calendar.app.google/D2WoiU27dQKDwbFv6" target="_blank" style="display: inline-block; background: #4285f4; border: 2px solid #ffffff; border-radius: 15px; padding: 20px 40px; font-size: 1.2rem; font-weight: 600; color: #ffffff; text-decoration: none; transition: all 0.3s ease;">
-          Book a Free Consultation
-        </a>
       </div>
     </div>
   </section>
