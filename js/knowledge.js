@@ -226,7 +226,8 @@
 
   function searchKG(query) {
     setLoading(true);
-    var apiKey = (window.KG_CONFIG && window.KG_CONFIG.API_KEY) || '';
+    // API key for Google Knowledge Graph Search API
+    var apiKey = (window.KG_CONFIG && window.KG_CONFIG.API_KEY) || 'AIzaSyAbJMCWHgcFH2t3J6Tww-wqVpY_y1Q7U7E';
     if (!apiKey) {
       renderResults([]);
       var warn = document.createElement('div');
