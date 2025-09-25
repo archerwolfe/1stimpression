@@ -235,27 +235,7 @@
       searchGkpsBtn.addEventListener('click', handleSearch);
     }
 
-    // Google Search button
-    var googleSearchBtn = document.querySelector('.google-search');
-    if (googleSearchBtn) {
-      googleSearchBtn.addEventListener('click', function() {
-        var q = (queryInput.value || '').trim();
-        if (q) {
-          window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
-        } else {
-          window.open('https://www.google.com', '_blank');
-        }
-      });
-    }
-
-    // I'm Feeling Famous button (coming soon)
-    var feelingFamousBtn = document.querySelector('.feeling-famous');
-    if (feelingFamousBtn) {
-      feelingFamousBtn.addEventListener('click', function() {
-        alert('This feature is coming soon!');
-      });
-    }
+    // Only "Search GKPs" is kept per design
   }
 })();
-
 
