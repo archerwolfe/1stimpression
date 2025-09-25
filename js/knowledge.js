@@ -26,6 +26,7 @@
       var detailed = item.resultScore ? ('Score: ' + item.resultScore.toFixed(2)) : '';
       var imageUrl = entity.image && entity.image.contentUrl ? entity.image.contentUrl : null;
       var url = entity.detailedDescription && entity.detailedDescription.url ? entity.detailedDescription.url : (entity.url || null);
+      var googleSearchUrl = entity.url || null; // This is the Google search URL for the entity
       var types = Array.isArray(entity['@type']) ? entity['@type'] : (entity['@type'] ? [entity['@type']] : []);
 
       var card = document.createElement('div');
@@ -103,9 +104,10 @@
         content.appendChild(a);
       }
 
-      if (entity['@id']) {
+      // Use the Google search URL from the API response
+      if (googleSearchUrl) {
         var kgButton = document.createElement('a');
-        kgButton.href = 'https://www.google.com/search?kgmid=' + encodeURIComponent(entity['@id']);
+        kgButton.href = googleSearchUrl;
         kgButton.target = '_blank';
         kgButton.className = 'button green-button w-button';
         kgButton.textContent = 'View Knowledge Panel on Google';
