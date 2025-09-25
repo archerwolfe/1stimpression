@@ -113,7 +113,9 @@
       }
 
       // Prefer KGMID deep-link if available, else use API's entity.url, else fallback to name query
-      var kgmid = entity['@id'] || null;
+      // KGMID from API can be in form "kg:/g/xxxx"; strip leading "kg:" so Google accepts it
+      var kgmidRaw = entity['@id'] || null;
+      var kgmid = kgmidRaw ? kgmidRaw.replace(/^kg:/, '') : null;
       var finalGoogleUrl = kgmid
         ? ('https://www.google.com/search?kgmid=' + encodeURIComponent(kgmid))
         : (googleSearchUrl || ('https://www.google.com/search?q=' + encodeURIComponent(name)));
