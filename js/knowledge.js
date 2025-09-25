@@ -112,8 +112,11 @@
         content.appendChild(a);
       }
 
-      // Use the Google search URL from the API response, or create one if not available
-      var finalGoogleUrl = googleSearchUrl || 'https://www.google.com/search?q=' + encodeURIComponent(name);
+      // Prefer KGMID deep-link if available, else use API's entity.url, else fallback to name query
+      var kgmid = entity['@id'] || null;
+      var finalGoogleUrl = kgmid
+        ? ('https://www.google.com/search?kgmid=' + encodeURIComponent(kgmid))
+        : (googleSearchUrl || ('https://www.google.com/search?q=' + encodeURIComponent(name)));
       var kgButton = document.createElement('a');
       kgButton.href = finalGoogleUrl;
       kgButton.target = '_blank';
