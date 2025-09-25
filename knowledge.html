@@ -126,28 +126,48 @@
     .result-card-confidence {
       margin-top: 16px;
       padding: 12px;
-      background: #f0f9ff;
-      border: 1px solid #bae6fd;
       border-radius: 8px;
       text-align: center;
+      transition: all 0.2s ease-in-out;
     }
     
     .confidence-title {
       font-size: 12px;
-      color: #0369a1;
       font-weight: 500;
       margin-bottom: 4px;
+      color: #6b7280;
     }
     
     .confidence-value {
       font-size: 18px;
       font-weight: 600;
-      color: #0369a1;
+      margin-bottom: 2px;
     }
     
     .confidence-sub {
       font-size: 11px;
-      color: #0369a1;
+      font-weight: 500;
+    }
+    
+    /* Confidence level colors */
+    .confidence-very-high {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+    }
+    
+    .confidence-high {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+    }
+    
+    .confidence-medium {
+      background: #fffbeb;
+      border: 1px solid #fed7aa;
+    }
+    
+    .confidence-low {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
     }
 
     /* Responsive design */

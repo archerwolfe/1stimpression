@@ -35,6 +35,13 @@
     
     resultsEl.appendChild(resultsHeader);
 
+    // Sort items by confidence score (highest first)
+    items.sort(function(a, b) {
+      var scoreA = a.resultScore || 0;
+      var scoreB = b.resultScore || 0;
+      return scoreB - scoreA;
+    });
+
     // Create results grid container
     var resultsGrid = document.createElement('div');
     resultsGrid.className = 'results-grid';
@@ -132,28 +139,56 @@
 
       card.appendChild(buttonContainer);
 
-      // Confidence score
-      if (detailed) {
-        var confidence = document.createElement('div');
-        confidence.className = 'result-card-confidence';
-        
-        var confTitle = document.createElement('div');
-        confTitle.className = 'confidence-title';
-        confTitle.textContent = "Google's Confidence";
-        
-        var confValue = document.createElement('div');
-        confValue.className = 'confidence-value';
-        confValue.textContent = '100%';
-        
-        var confSub = document.createElement('div');
-        confSub.className = 'confidence-sub';
-        confSub.textContent = 'Very high confidence';
-        
-        confidence.appendChild(confTitle);
-        confidence.appendChild(confValue);
-        confidence.appendChild(confSub);
-        card.appendChild(confidence);
+      // Dynamic confidence score based on Google's resultScore
+      var resultScore = item.resultScore || 0;
+      var confidence = document.createElement('div');
+      confidence.className = 'result-card-confidence';
+      
+      var confTitle = document.createElement('div');
+      confTitle.className = 'confidence-title';
+      confTitle.textContent = "Google's Confidence";
+      
+      // Calculate confidence percentage and category
+      var confidencePercentage = Math.round(resultScore * 100);
+      var confidenceCategory = '';
+      var confidenceColor = '';
+      var confidenceClass = '';
+      
+      if (confidencePercentage >= 80) {
+        confidenceCategory = 'Very high confidence';
+        confidenceColor = '#10b981'; // Green
+        confidenceClass = 'confidence-very-high';
+      } else if (confidencePercentage >= 60) {
+        confidenceCategory = 'High confidence';
+        confidenceColor = '#3b82f6'; // Blue
+        confidenceClass = 'confidence-high';
+      } else if (confidencePercentage >= 40) {
+        confidenceCategory = 'Medium confidence';
+        confidenceColor = '#f59e0b'; // Orange
+        confidenceClass = 'confidence-medium';
+      } else {
+        confidenceCategory = 'Low confidence';
+        confidenceColor = '#ef4444'; // Red
+        confidenceClass = 'confidence-low';
       }
+      
+      // Apply confidence level class
+      confidence.className += ' ' + confidenceClass;
+      
+      var confValue = document.createElement('div');
+      confValue.className = 'confidence-value';
+      confValue.textContent = confidencePercentage + '%';
+      confValue.style.color = confidenceColor;
+      
+      var confSub = document.createElement('div');
+      confSub.className = 'confidence-sub';
+      confSub.textContent = confidenceCategory;
+      confSub.style.color = confidenceColor;
+      
+      confidence.appendChild(confTitle);
+      confidence.appendChild(confValue);
+      confidence.appendChild(confSub);
+      card.appendChild(confidence);
 
       resultsGrid.appendChild(card);
     });
