@@ -42,6 +42,15 @@
       return scoreB - scoreA;
     });
 
+    // Find the highest score for normalization
+    var maxScore = 0;
+    items.forEach(function(item) {
+      var score = item.resultScore || 0;
+      if (score > maxScore) {
+        maxScore = score;
+      }
+    });
+
     // Create results grid container
     var resultsGrid = document.createElement('div');
     resultsGrid.className = 'results-grid';
@@ -149,7 +158,20 @@
       confTitle.textContent = "Google's Confidence";
       
       // Calculate confidence percentage and category
-      var confidencePercentage = Math.round(resultScore * 100);
+      // Normalize the score relative to the highest score in the results
+      var confidencePercentage;
+      
+      if (maxScore > 0) {
+        // Normalize to 0-100 scale based on the highest score
+        confidencePercentage = Math.round((resultScore / maxScore) * 100);
+      } else {
+        // Fallback if no scores available
+        confidencePercentage = 50;
+      }
+      
+      // Ensure percentage is within 0-100 range
+      confidencePercentage = Math.max(0, Math.min(100, confidencePercentage));
+      
       var confidenceCategory = '';
       var confidenceColor = '';
       var confidenceClass = '';
