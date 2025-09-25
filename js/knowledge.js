@@ -56,6 +56,17 @@
         bottom.appendChild(a);
       }
 
+      // Add Google Knowledge Graph search button if KGMID exists
+      if (entity['@id']) {
+        var kgButton = document.createElement('a');
+        kgButton.href = 'https://www.google.com/search?kgmid=' + encodeURIComponent(entity['@id']);
+        kgButton.target = '_blank';
+        kgButton.className = 'button green-button w-button';
+        kgButton.textContent = 'Google Search';
+        kgButton.style.marginLeft = '8px';
+        bottom.appendChild(kgButton);
+      }
+
       if (detailed) {
         var small = document.createElement('div');
         small.className = 'text-block-4';
