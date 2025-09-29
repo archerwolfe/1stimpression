@@ -16,22 +16,29 @@
 
     // Create results header
     var resultsHeader = document.createElement('div');
-    resultsHeader.style.marginBottom = '32px';
+    resultsHeader.style.marginBottom = '40px';
     resultsHeader.style.textAlign = 'center';
     
-    var headerTitle = document.createElement('h2');
+    // Main title
+    var headerTitle = document.createElement('h1');
     headerTitle.className = 'headings';
-    headerTitle.style.fontSize = '28px';
-    headerTitle.style.fontWeight = '600';
-    headerTitle.style.marginBottom = '8px';
-    headerTitle.textContent = 'Search Results';
+    headerTitle.style.fontSize = '3.5rem';
+    headerTitle.style.fontWeight = '700';
+    headerTitle.style.color = '#303135';
+    headerTitle.style.margin = '0 0 10px 0';
+    headerTitle.style.lineHeight = '1.2';
+    headerTitle.textContent = 'Knowledge Panel Results for';
     resultsHeader.appendChild(headerTitle);
     
-    var queryText = document.createElement('p');
-    queryText.style.fontSize = '16px';
-    queryText.style.color = '#666';
-    queryText.textContent = 'Results for "' + (queryInput ? queryInput.value : '') + '"';
-    resultsHeader.appendChild(queryText);
+    // Query name (smaller) - NO "Knowledge Panel Results for" here!
+    var queryName = document.createElement('div');
+    queryName.style.fontSize = '3rem';
+    queryName.style.fontWeight = '400';
+    queryName.style.color = '#303135';
+    queryName.style.margin = '0';
+    queryName.style.lineHeight = '1.2';
+    queryName.textContent = '"' + (queryInput ? queryInput.value : '') + '"';
+    resultsHeader.appendChild(queryName);
     
     resultsEl.appendChild(resultsHeader);
 
