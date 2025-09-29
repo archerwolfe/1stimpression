@@ -177,6 +177,51 @@
   display: flex;
 }
 
+/* Reduced spacing for content containers in sections starting from "what" */
+#what .container.content,
+#how .container.content,
+#who .container.content,
+#contact .container.content {
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+/* Additional spacing reduction for "who" section container */
+#who .container {
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+/* Isolated sections with proper spacing and centering */
+#get-free-audit.section {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10vh 0;
+}
+
+#schedule-call.section {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10vh 0;
+}
+
+/* Center sections when they are the target of scroll */
+#get-free-audit:target,
+#schedule-call:target {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .nav-link {
   padding: 9px;
   font-size: 15px;
@@ -346,6 +391,14 @@
   align-items: center;
   padding: 15vh 20px;
   display: flex;
+}
+
+/* Reduced spacing for sections starting from "what" */
+#what .section-break,
+#how .section-break,
+#who .section-break,
+#contact .section-break {
+  padding: 3vh 20px;
 }
 
 .green {

@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="1st Impression | Online Reputation Management">
   <meta name="twitter:description" content="Reinventing the 1st Impression. Were you satisfied the last time you Googled yourself? Request a free audit of your digital footprint today and learn more about how to create, improve and manage your online reputation with 1st Impression.">
-  <meta name="twitter:image" content="images/social-preview.png">
+  <meta name="twitter:image" content="https://1stimpression.com/images/social-preview.png">
   <meta name="twitter:image:alt" content="1st Impression - Reinventing the 1st impression">
   
   <!-- Additional SEO Meta Tags -->
@@ -89,7 +89,9 @@
         <a href="#get-free-audit" class="button grey w-button">No</a>
       </div>
     </div>
-    <div id="get-free-audit" class="container content">
+  </section>
+  <section id="get-free-audit" class="section">
+    <div class="container content">
       <div class="composed-heading">
         <div class="headings">Apply for a <strong>FREE audit</strong> of your current digital profile below 
           and get a personalized strategy on how to improve it!</div>
@@ -98,7 +100,9 @@
         <a href="#contact" class="button w-button">Get a Free Profile Audit</a>
       </div>
     </div>
-    <div id="schedule-call" class="container content">
+  </section>
+  <section id="schedule-call" class="section">
+    <div class="container content">
       <div class="composed-heading">
         <div class="headings">If you want some <strong>FREE advice</strong> on how to to optimize your online identity for <strong>better conversions</strong>, or have questions about your current profiles, schedule a 
           <strong>quick 15-minute consultation</strong> below!</div>
@@ -107,8 +111,8 @@
         <a href="https://calendar.app.google/D2WoiU27dQKDwbFv6" target="_blank" class="button green-button w-button">Schedule a Quick Call</a>
       </div>
     </div>
-    <div class="section-break"><img src="images/Mask-group-1.svg" loading="lazy" alt=""></div>
   </section>
+  <div class="section-break"><img src="images/Mask-group-1.svg" loading="lazy" alt=""></div>
   <section class="section hide">
     <div class="container content">
       <div class="composed-heading">
@@ -316,6 +320,44 @@
   <script src="js/webflow.js" type="text/javascript"></script>
   
   <script>
+    // Handle Yes/No button clicks
+    document.addEventListener('DOMContentLoaded', function() {
+      // Add click handlers for Yes/No buttons
+      const yesButton = document.querySelector('a[href="#schedule-call"]');
+      const noButton = document.querySelector('a[href="#get-free-audit"]');
+      
+      if (yesButton) {
+        yesButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          scrollToScheduleCall();
+        });
+      }
+      
+      if (noButton) {
+        noButton.addEventListener('click', function(e) {
+          e.preventDefault();
+          scrollToFreeAudit();
+        });
+      }
+    });
+    
+    function scrollToScheduleCall() {
+      // Scroll to the schedule call section
+      const scheduleSection = document.getElementById('schedule-call');
+      if (scheduleSection) {
+        scheduleSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    
+    function scrollToFreeAudit() {
+      // Scroll to the free audit section
+      const auditSection = document.getElementById('get-free-audit');
+      if (auditSection) {
+        auditSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    
+
     // Knowledge Graph search functionality
     document.addEventListener('DOMContentLoaded', function() {
       var kgSearchBtn = document.getElementById('kg-search-btn');
