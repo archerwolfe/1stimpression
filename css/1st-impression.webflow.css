@@ -221,6 +221,20 @@
   align-items: center;
 }
 
+/* Tablet optimization */
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  #get-free-audit.section,
+  #schedule-call.section {
+    min-height: 55vh;
+    padding: 7vh 0;
+  }
+  
+  #get-free-audit:target,
+  #schedule-call:target {
+    min-height: 55vh;
+  }
+}
+
 
 .nav-link {
   padding: 9px;
@@ -698,6 +712,18 @@
   .container.content {
     margin-top: 60px;
   }
+  
+  /* Mobile/Tablet optimization for isolated sections */
+  #get-free-audit.section,
+  #schedule-call.section {
+    min-height: 50vh;
+    padding: 5vh 0;
+  }
+  
+  #get-free-audit:target,
+  #schedule-call:target {
+    min-height: 50vh;
+  }
 
   .brand {
     padding-left: 18px;
@@ -814,6 +840,34 @@
     justify-content: center;
     align-items: center;
   }
+  
+  /* Mobile optimization for isolated sections */
+  #get-free-audit.section,
+  #schedule-call.section {
+    min-height: 40vh;
+    padding: 3vh 0;
+  }
+  
+  #get-free-audit:target,
+  #schedule-call:target {
+    min-height: 40vh;
+  }
+  
+  /* Reduce spacing for mobile */
+  #what .container.content,
+  #how .container.content,
+  #who .container.content,
+  #contact .container.content {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+  }
+  
+  #what .section-break,
+  #how .section-break,
+  #who .section-break,
+  #contact .section-break {
+    padding: 1.5vh 20px;
+  }
 
   .cards {
     flex-flow: column;
@@ -828,6 +882,34 @@
   .nav-link {
     text-align: center;
     margin-bottom: 20px;
+  }
+  
+  /* Small mobile optimization for isolated sections */
+  #get-free-audit.section,
+  #schedule-call.section {
+    min-height: 35vh;
+    padding: 2vh 0;
+  }
+  
+  #get-free-audit:target,
+  #schedule-call:target {
+    min-height: 35vh;
+  }
+  
+  /* Further reduce spacing for small mobile */
+  #what .container.content,
+  #how .container.content,
+  #who .container.content,
+  #contact .container.content {
+    margin-top: 1vh;
+    margin-bottom: 1vh;
+  }
+  
+  #what .section-break,
+  #how .section-break,
+  #who .section-break,
+  #contact .section-break {
+    padding: 1vh 20px;
   }
 
   .button {
