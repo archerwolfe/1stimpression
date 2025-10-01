@@ -17,6 +17,46 @@
       margin: 0 !important;
       padding: 0 !important;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+    
+    /* Remove any white overlays or backgrounds that might be covering content */
+    html body.body * {
+      background: transparent !important;
+      background-color: transparent !important;
+    }
+    
+    /* Force all sections to be visible and remove any overlays */
+    html body.body .hero-section,
+    html body.body .content-section,
+    html body.body .footer,
+    html body.body .main-title,
+    html body.body .search-interface,
+    html body.body .search-bar,
+    html body.body .action-btn {
+      background: transparent !important;
+      background-color: transparent !important;
+      z-index: 9999 !important;
+      position: relative !important;
+    }
+    
+    /* Remove any white overlays that might be covering content */
+    html body.body div[style*="background"],
+    html body.body div[style*="background-color"],
+    html body.body section[style*="background"],
+    html body.body section[style*="background-color"] {
+      background: transparent !important;
+      background-color: transparent !important;
+      z-index: 1 !important;
+    }
+    
+    /* Force content to be on top */
+    html body.body .hero-section *,
+    html body.body .content-section *,
+    html body.body .footer * {
+      z-index: 10000 !important;
+      position: relative !important;
     }
     
     /* Force display of all sections */
@@ -997,6 +1037,19 @@
         if (window.innerWidth <= 768) {
           document.body.classList.add('mobile-forced');
           
+          // Remove any white overlays or backgrounds
+          document.body.style.background = 'transparent';
+          document.body.style.backgroundColor = 'transparent';
+          
+          // Remove white backgrounds from all elements
+          const allElements = document.querySelectorAll('*');
+          allElements.forEach(el => {
+            el.style.background = 'transparent';
+            el.style.backgroundColor = 'transparent';
+            el.style.zIndex = '9999';
+            el.style.position = 'relative';
+          });
+          
           // Force display of all sections
           const heroSection = document.querySelector('.hero-section');
           const contentSection = document.querySelector('.content-section');
@@ -1010,23 +1063,33 @@
             heroSection.style.padding = '40px 0 60px';
             heroSection.style.textAlign = 'center';
             heroSection.style.minHeight = '300px';
+            heroSection.style.zIndex = '9999';
+            heroSection.style.position = 'relative';
+            heroSection.style.background = 'transparent';
+            heroSection.style.backgroundColor = 'transparent';
           }
           
           if (contentSection) {
             contentSection.style.display = 'block';
             contentSection.style.visibility = 'visible';
             contentSection.style.opacity = '1';
-            contentSection.style.background = '#ffffff';
+            contentSection.style.background = 'transparent';
+            contentSection.style.backgroundColor = 'transparent';
             contentSection.style.padding = '1px 0';
+            contentSection.style.zIndex = '9999';
+            contentSection.style.position = 'relative';
           }
           
           if (footer) {
             footer.style.display = 'block';
             footer.style.visibility = 'visible';
             footer.style.opacity = '1';
-            footer.style.background = '#ffffff';
+            footer.style.background = 'transparent';
+            footer.style.backgroundColor = 'transparent';
             footer.style.color = '#2c2c2c';
             footer.style.padding = '60px 0 40px';
+            footer.style.zIndex = '9999';
+            footer.style.position = 'relative';
           }
           
           // Force main title visibility
