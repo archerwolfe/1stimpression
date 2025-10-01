@@ -291,11 +291,42 @@
       // Get language
       var language = navigator.language || navigator.userLanguage || '';
       
+      // Get country from language/locale
+      var country = 'Unknown';
+      if (language) {
+        var localeParts = language.split('-');
+        if (localeParts.length > 1) {
+          var countryCode = localeParts[1];
+          // Convert country code to country name
+          var countryMap = {
+            'US': 'United States', 'CA': 'Canada', 'GB': 'United Kingdom', 'AU': 'Australia',
+            'DE': 'Germany', 'FR': 'France', 'ES': 'Spain', 'IT': 'Italy', 'NL': 'Netherlands',
+            'SE': 'Sweden', 'NO': 'Norway', 'DK': 'Denmark', 'FI': 'Finland', 'CH': 'Switzerland',
+            'AT': 'Austria', 'BE': 'Belgium', 'IE': 'Ireland', 'PT': 'Portugal', 'PL': 'Poland',
+            'CZ': 'Czech Republic', 'HU': 'Hungary', 'SK': 'Slovakia', 'SI': 'Slovenia',
+            'HR': 'Croatia', 'BG': 'Bulgaria', 'RO': 'Romania', 'GR': 'Greece', 'CY': 'Cyprus',
+            'MT': 'Malta', 'LU': 'Luxembourg', 'EE': 'Estonia', 'LV': 'Latvia', 'LT': 'Lithuania',
+            'JP': 'Japan', 'KR': 'South Korea', 'CN': 'China', 'TW': 'Taiwan', 'HK': 'Hong Kong',
+            'SG': 'Singapore', 'MY': 'Malaysia', 'TH': 'Thailand', 'VN': 'Vietnam', 'ID': 'Indonesia',
+            'PH': 'Philippines', 'IN': 'India', 'PK': 'Pakistan', 'BD': 'Bangladesh', 'LK': 'Sri Lanka',
+            'MX': 'Mexico', 'BR': 'Brazil', 'AR': 'Argentina', 'CL': 'Chile', 'CO': 'Colombia',
+            'PE': 'Peru', 'VE': 'Venezuela', 'UY': 'Uruguay', 'PY': 'Paraguay', 'BO': 'Bolivia',
+            'EC': 'Ecuador', 'GY': 'Guyana', 'SR': 'Suriname', 'ZA': 'South Africa', 'NG': 'Nigeria',
+            'KE': 'Kenya', 'EG': 'Egypt', 'MA': 'Morocco', 'TN': 'Tunisia', 'DZ': 'Algeria',
+            'RU': 'Russia', 'UA': 'Ukraine', 'BY': 'Belarus', 'KZ': 'Kazakhstan', 'UZ': 'Uzbekistan',
+            'TR': 'Turkey', 'IL': 'Israel', 'AE': 'United Arab Emirates', 'SA': 'Saudi Arabia',
+            'KW': 'Kuwait', 'QA': 'Qatar', 'BH': 'Bahrain', 'OM': 'Oman', 'JO': 'Jordan',
+            'LB': 'Lebanon', 'SY': 'Syria', 'IQ': 'Iraq', 'IR': 'Iran', 'AF': 'Afghanistan'
+          };
+          country = countryMap[countryCode] || 'Unknown';
+        }
+      }
+      
       // Prepare search data
       var searchData = {
         query: query,
         userAgent: navigator.userAgent,
-        ipAddress: '', // Will be detected by server
+        ipAddress: 'Unknown', // Can't get real IP with current method
         referrer: document.referrer || '',
         resultsCount: results.length,
         topResultName: results.length > 0 && results[0].result ? results[0].result.name : '',
@@ -304,7 +335,8 @@
         timestamp: new Date().toISOString(),
         language: language,
         screenResolution: screenResolution,
-        searchDuration: performance.now() // Time since page load
+        searchDuration: performance.now(), // Time since page load
+        detectedCountry: country // Add detected country
       };
 
       // Send data to Google Apps Script

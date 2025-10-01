@@ -47,8 +47,8 @@ function doPost(e) {
       ipAddress = data.ipAddress;
     }
     
-    // Get location data from IP
-    const locationData = getLocationFromIP(ipAddress);
+    // Get location data from IP or use detected country
+    const locationData = getLocationFromIP(ipAddress, data.detectedCountry);
     
     // Prepare the data to log
     const timestamp = new Date();
@@ -185,8 +185,8 @@ function logToSpreadsheet(data) {
     const spreadsheetId = '1JY01Ka3QJMw2HDmo6UFSxsbq1f-02amr48NlJDIFdF4';
     const sheet = SpreadsheetApp.openById(spreadsheetId).getActiveSheet();
     
-    // Get location data from IP
-    const locationData = getLocationFromIP(data.ipAddress || '');
+    // Get location data from IP or use detected country
+    const locationData = getLocationFromIP(data.ipAddress || '', data.detectedCountry);
     
     // Prepare the data to log
     const timestamp = new Date();
@@ -258,11 +258,11 @@ function logToSpreadsheet(data) {
 }
 
 // Get location data from IP address using ipapi.co (free service)
-function getLocationFromIP(ipAddress) {
+function getLocationFromIP(ipAddress, detectedCountry) {
   if (!ipAddress || ipAddress === '127.0.0.1' || ipAddress === 'localhost' || ipAddress === 'Unknown') {
-    // Since we can't get real IP from GET requests, return placeholder data
+    // Use detected country from browser language if available
     return {
-      country: 'Web User',
+      country: detectedCountry || 'Web User',
       region: 'Online',
       city: 'Internet',
       timezone: 'UTC'
@@ -307,9 +307,9 @@ function getLocationFromIP(ipAddress) {
     console.log('Error fetching location data from ip-api.com:', error);
   }
   
-  // Final fallback
+  // Final fallback - use detected country if available
   return {
-    country: 'Web User',
+    country: detectedCountry || 'Web User',
     region: 'Online',
     city: 'Internet',
     timezone: 'UTC'
