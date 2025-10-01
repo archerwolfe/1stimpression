@@ -293,10 +293,16 @@
       
       // Get country from language/locale
       var country = 'Unknown';
+      console.log('Browser language detected:', language); // Debug log
+      
       if (language) {
         var localeParts = language.split('-');
+        console.log('Language parts:', localeParts); // Debug log
+        
         if (localeParts.length > 1) {
           var countryCode = localeParts[1];
+          console.log('Country code:', countryCode); // Debug log
+          
           // Convert country code to country name
           var countryMap = {
             'US': 'United States', 'CA': 'Canada', 'GB': 'United Kingdom', 'AU': 'Australia',
@@ -319,8 +325,24 @@
             'LB': 'Lebanon', 'SY': 'Syria', 'IQ': 'Iraq', 'IR': 'Iran', 'AF': 'Afghanistan'
           };
           country = countryMap[countryCode] || 'Unknown';
+          console.log('Detected country:', country); // Debug log
+        } else {
+          // Try to detect from just the language part
+          var langCode = localeParts[0];
+          console.log('Language code only:', langCode); // Debug log
+          
+          // Map common language codes to likely countries
+          var langCountryMap = {
+            'en': 'United States', 'es': 'Spain', 'fr': 'France', 'de': 'Germany',
+            'it': 'Italy', 'pt': 'Brazil', 'ru': 'Russia', 'ja': 'Japan',
+            'ko': 'South Korea', 'zh': 'China', 'ar': 'Saudi Arabia', 'hi': 'India'
+          };
+          country = langCountryMap[langCode] || 'Unknown';
+          console.log('Language-based country:', country); // Debug log
         }
       }
+      
+      console.log('Final detected country:', country); // Debug log
       
       // Prepare search data
       var searchData = {
