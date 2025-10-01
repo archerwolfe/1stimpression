@@ -393,23 +393,43 @@
                 kgmid = kgmid.replace(/^kg:/, '');
                 // Redirect to Google Knowledge Graph search
                 var kgUrl = 'https://www.google.com/search?kgmid=' + encodeURIComponent(kgmid);
-                window.open(kgUrl, '_blank');
+                
+                // Ensure mobile compatibility for opening new tabs
+                if (window.innerWidth <= 768) {
+                  // For mobile, use location.href to ensure proper navigation
+                  window.location.href = kgUrl;
+                } else {
+                  // For desktop, use window.open
+                  window.open(kgUrl, '_blank');
+                }
               } else {
                 // Fallback to regular Google search
                 var fallbackUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-                window.open(fallbackUrl, '_blank');
+                if (window.innerWidth <= 768) {
+                  window.location.href = fallbackUrl;
+                } else {
+                  window.open(fallbackUrl, '_blank');
+                }
               }
             } else {
               // No Knowledge Graph results, fallback to regular Google search
               var fallbackUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-              window.open(fallbackUrl, '_blank');
+              if (window.innerWidth <= 768) {
+                window.location.href = fallbackUrl;
+              } else {
+                window.open(fallbackUrl, '_blank');
+              }
             }
           })
           .catch(function (error) {
             console.error('Knowledge Graph search error:', error);
             // Fallback to regular Google search on error
             var fallbackUrl = 'https://www.google.com/search?q=' + encodeURIComponent(query);
-            window.open(fallbackUrl, '_blank');
+            if (window.innerWidth <= 768) {
+              window.location.href = fallbackUrl;
+            } else {
+              window.open(fallbackUrl, '_blank');
+            }
           })
           .finally(function() {
             // Reset button state

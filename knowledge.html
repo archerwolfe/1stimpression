@@ -1537,7 +1537,7 @@
             button.style.zIndex = '10';
             button.style.position = 'relative';
             
-            // Ensure green buttons have proper styling
+            // Ensure green buttons have proper styling and functionality
             if (button.classList.contains('green-button')) {
               button.style.background = '#34a853';
               button.style.color = '#ffffff';
@@ -1550,6 +1550,15 @@
               button.style.boxShadow = '0 2px 4px rgba(52, 168, 83, 0.3)';
               button.style.width = '100%';
               button.style.minHeight = '44px';
+              
+              // Ensure the href attribute is preserved and functional
+              if (button.href && button.href.includes('kgmid=')) {
+                // The button already has the correct kgmid URL, ensure it's clickable
+                button.onclick = function(e) {
+                  e.preventDefault();
+                  window.open(button.href, '_blank');
+                };
+              }
             }
           });
         }
@@ -1558,6 +1567,40 @@
       // Run on load and resize
       forceMobileLayout();
       window.addEventListener('resize', forceMobileLayout);
+      
+      // Additional mobile button functionality fix
+      function ensureMobileButtonFunctionality() {
+        if (window.innerWidth <= 768) {
+          // Wait for search results to be rendered, then fix button functionality
+          setTimeout(function() {
+            const greenButtons = document.querySelectorAll('.green-button');
+            greenButtons.forEach(function(button) {
+              // Ensure the button has the correct href and is clickable
+              if (button.href && button.href.includes('kgmid=')) {
+                button.style.pointerEvents = 'auto';
+                button.style.cursor = 'pointer';
+                button.style.zIndex = '999';
+                button.style.position = 'relative';
+                
+                // Add click handler as backup
+                button.onclick = function(e) {
+                  e.preventDefault();
+                  window.open(button.href, '_blank');
+                };
+              }
+            });
+          }, 1000); // Wait 1 second for results to render
+        }
+      }
+      
+      // Run button functionality check after search
+      const originalSearchFunction = window.searchKnowledgeGraph;
+      if (originalSearchFunction) {
+        window.searchKnowledgeGraph = function() {
+          originalSearchFunction.apply(this, arguments);
+          ensureMobileButtonFunctionality();
+        };
+      }
       
       const searchInput = document.getElementById('kg-query');
       const clearBtn = document.getElementById('clear-search');
