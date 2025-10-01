@@ -128,10 +128,127 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  // Handle GET requests (for testing)
-  return ContentService
-    .createTextOutput(JSON.stringify({message: 'Knowledge Graph Search Tracker is running'}))
-    .setMimeType(ContentService.MimeType.JSON);
+  try {
+    // Handle JSONP requests from website
+    if (e.parameter.callback) {
+      var data = {
+        query: e.parameter.query || '',
+        userAgent: e.parameter.userAgent || '',
+        ipAddress: e.parameter.ipAddress || '',
+        referrer: e.parameter.referrer || '',
+        resultsCount: parseInt(e.parameter.resultsCount) || 0,
+        topResultName: e.parameter.topResultName || '',
+        topResultScore: parseFloat(e.parameter.topResultScore) || 0,
+        sessionId: e.parameter.sessionId || '',
+        timestamp: e.parameter.timestamp || new Date().toISOString(),
+        language: e.parameter.language || '',
+        screenResolution: e.parameter.screenResolution || '',
+        searchDuration: parseFloat(e.parameter.searchDuration) || 0
+      };
+      
+      // Log to spreadsheet
+      logToSpreadsheet(data);
+      
+      // Return JSONP response
+      var callback = e.parameter.callback;
+      var response = callback + '(' + JSON.stringify({success: true, message: 'Data logged successfully'}) + ');';
+      
+      return ContentService
+        .createTextOutput(response)
+        .setMimeType(ContentService.MimeType.JAVASCRIPT);
+    }
+    
+    // Handle regular GET requests (for testing)
+    return ContentService
+      .createTextOutput(JSON.stringify({message: 'Knowledge Graph Search Tracker is running'}))
+      .setMimeType(ContentService.MimeType.JSON);
+  } catch (error) {
+    var callback = e.parameter.callback || 'console.log';
+    var response = callback + '(' + JSON.stringify({success: false, error: error.toString()}) + ');';
+    
+    return ContentService
+      .createTextOutput(response)
+      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+  }
+}
+
+// Helper function to log data to spreadsheet
+function logToSpreadsheet(data) {
+  try {
+    // Get the active spreadsheet
+    const spreadsheetId = '1JY01Ka3QJMw2HDmo6UFSxsbq1f-02amr48NlJDIFdF4';
+    const sheet = SpreadsheetApp.openById(spreadsheetId).getActiveSheet();
+    
+    // Get location data from IP
+    const locationData = getLocationFromIP(data.ipAddress || '');
+    
+    // Prepare the data to log
+    const timestamp = new Date();
+    const searchQuery = data.query || '';
+    const userAgent = data.userAgent || '';
+    const referrer = data.referrer || '';
+    const resultsCount = data.resultsCount || 0;
+    const topResultName = data.topResultName || '';
+    const topResultScore = data.topResultScore || 0;
+    const sessionId = data.sessionId || '';
+    const searchDuration = data.searchDuration || 0;
+    const hasResults = resultsCount > 0;
+    const isMobile = /Mobile|Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+    const browser = getBrowserFromUserAgent(userAgent);
+    const os = getOSFromUserAgent(userAgent);
+    
+    // Add headers if this is the first row
+    if (sheet.getLastRow() === 0) {
+      sheet.getRange(1, 1, 1, 20).setValues([[
+        'Timestamp',
+        'Search Query',
+        'IP Address',
+        'Country',
+        'Region/State',
+        'City',
+        'Timezone',
+        'User Agent',
+        'Browser',
+        'Operating System',
+        'Is Mobile',
+        'Referrer',
+        'Results Count',
+        'Has Results',
+        'Top Result Name',
+        'Top Result Score',
+        'Search Duration (ms)',
+        'Session ID',
+        'Language',
+        'Screen Resolution'
+      ]]);
+    }
+    
+    // Add the search data
+    sheet.appendRow([
+      timestamp,
+      searchQuery,
+      data.ipAddress || '',
+      locationData.country || '',
+      locationData.region || '',
+      locationData.city || '',
+      locationData.timezone || '',
+      userAgent,
+      browser,
+      os,
+      isMobile,
+      referrer,
+      resultsCount,
+      hasResults,
+      topResultName,
+      topResultScore,
+      searchDuration,
+      sessionId,
+      data.language || '',
+      data.screenResolution || ''
+    ]);
+  } catch (error) {
+    console.log('Error logging to spreadsheet:', error);
+  }
 }
 
 // Get location data from IP address using ipapi.co (free service)

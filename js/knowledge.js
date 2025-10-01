@@ -311,22 +311,32 @@
       var webAppUrl = (window.KG_CONFIG && window.KG_CONFIG.TRACKING_URL) || 'https://script.google.com/macros/s/AKfycbzvpoh5VvKen77gHAtZvYonAQtHCs5Gu4ehyt7dgPZpZbndZsudOxDmh2O0dsDiKPs/exec';
       
       if (webAppUrl && webAppUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
-        fetch(webAppUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(searchData)
-        })
-        .then(function(response) {
-          return response.json();
-        })
-        .then(function(data) {
-          console.log('Search data logged successfully:', data);
-        })
-        .catch(function(error) {
-          console.log('Error logging search data:', error);
+        // Use JSONP method to bypass CORS
+        var script = document.createElement('script');
+        var callbackName = 'kgCallback_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        
+        // Create callback function
+        window[callbackName] = function(response) {
+          console.log('Search data logged successfully:', response);
+          // Clean up
+          delete window[callbackName];
+          document.head.removeChild(script);
+        };
+        
+        // Build URL with data as query parameters
+        var params = new URLSearchParams();
+        Object.keys(searchData).forEach(function(key) {
+          params.append(key, searchData[key]);
         });
+        
+        script.src = webAppUrl + '?' + params.toString() + '&callback=' + callbackName;
+        script.onerror = function() {
+          console.log('Error logging search data: JSONP failed');
+          delete window[callbackName];
+          document.head.removeChild(script);
+        };
+        
+        document.head.appendChild(script);
       } else {
         console.log('Google Apps Script URL not configured. Search data:', searchData);
       }
