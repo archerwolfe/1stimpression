@@ -40,17 +40,6 @@
       background-image: none !important;
     }
     
-    /* Force all elements to be visible and remove any overlays */
-    html body.body * {
-      background: transparent !important;
-      background-color: transparent !important;
-      background-image: none !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-      display: block !important;
-      z-index: 9999 !important;
-      position: relative !important;
-    }
     
     /* Force all sections to be visible and remove any overlays */
     html body.body .hero-section,
@@ -98,24 +87,6 @@
       z-index: 1 !important;
     }
     
-    /* Force all text and content to be visible */
-    html body.body h1,
-    html body.body h2,
-    html body.body h3,
-    html body.body p,
-    html body.body div,
-    html body.body span,
-    html body.body a,
-    html body.body button,
-    html body.body input {
-      background: transparent !important;
-      background-color: transparent !important;
-      opacity: 1 !important;
-      visibility: visible !important;
-      z-index: 10000 !important;
-      position: relative !important;
-      color: inherit !important;
-    }
     
     /* Force display of all sections */
     html body.body .hero-section {
@@ -148,8 +119,8 @@
     /* Force mobile layout */
     @media (max-width: 768px) {
       html body.body .hero-section {
-        padding: 5px 0 10px !important;
-        min-height: 50px !important;
+        padding: 20px 0 40px !important;
+        min-height: 200px !important;
         margin-top: 0 !important;
       }
       
@@ -157,14 +128,14 @@
         font-size: 2.2rem !important;
         line-height: 1.2 !important;
         color: #2c2c2c !important;
-        margin: 0 0 5px !important;
+        margin: 0 0 20px !important;
         display: block !important;
         visibility: visible !important;
       }
       
       html body.body .subtitle {
         font-size: 0.8rem !important;
-        margin-bottom: 5px !important;
+        margin-bottom: 20px !important;
         display: block !important;
         visibility: visible !important;
       }
@@ -173,7 +144,7 @@
         display: block !important;
         visibility: visible !important;
         max-width: 100% !important;
-        margin: 0 auto 5px !important;
+        margin: 0 auto 20px !important;
         padding: 0 10px !important;
       }
       
@@ -183,11 +154,11 @@
         background: #f8f8f8 !important;
         border: 2px solid rgba(255,255,255,0.5) !important;
         border-radius: 12px !important;
-        padding: 10px 15px !important;
+        padding: 15px 20px !important;
         box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
         align-items: center !important;
         gap: 12px !important;
-        margin-bottom: 5px !important;
+        margin-bottom: 20px !important;
       }
       
       html body.body .search-input {
@@ -1150,25 +1121,6 @@
       TRACKING_URL: "https://script.google.com/macros/s/AKfycbzvpoh5VvKen77gHAtZvYonAQtHCs5Gu4ehyt7dgPZpZbndZsudOxDmh2O0dsDiKPs/exec"
     };
     
-    // Immediate function to remove white overlays
-    (function() {
-      // Remove white overlays immediately
-      document.body.style.background = 'transparent';
-      document.body.style.backgroundColor = 'transparent';
-      document.body.style.backgroundImage = 'none';
-      
-      // Remove white backgrounds from all elements immediately
-      const allElements = document.querySelectorAll('*');
-      allElements.forEach(el => {
-        el.style.background = 'transparent';
-        el.style.backgroundColor = 'transparent';
-        el.style.backgroundImage = 'none';
-        el.style.opacity = '1';
-        el.style.visibility = 'visible';
-        el.style.zIndex = '9999';
-        el.style.position = 'relative';
-      });
-    })();
     
     // Mobile-specific enhancements and force mobile layout
     document.addEventListener('DOMContentLoaded', function() {
@@ -1177,35 +1129,6 @@
         if (window.innerWidth <= 768) {
           document.body.classList.add('mobile-forced');
           
-          // Remove any white overlays or backgrounds
-          document.body.style.background = 'transparent';
-          document.body.style.backgroundColor = 'transparent';
-          document.body.style.backgroundImage = 'none';
-          
-          // Remove white backgrounds from all elements
-          const allElements = document.querySelectorAll('*');
-          allElements.forEach(el => {
-            el.style.background = 'transparent';
-            el.style.backgroundColor = 'transparent';
-            el.style.backgroundImage = 'none';
-            el.style.zIndex = '9999';
-            el.style.position = 'relative';
-            el.style.opacity = '1';
-            el.style.visibility = 'visible';
-            el.style.display = 'block';
-          });
-          
-          // Force remove any white overlays from specific containers
-          const containers = document.querySelectorAll('.container, .w-container, div, section, article, main');
-          containers.forEach(container => {
-            container.style.background = 'transparent';
-            container.style.backgroundColor = 'transparent';
-            container.style.backgroundImage = 'none';
-            container.style.opacity = '1';
-            container.style.visibility = 'visible';
-            container.style.zIndex = '9999';
-            container.style.position = 'relative';
-          });
           
           // Force display of all sections
           const heroSection = document.querySelector('.hero-section');
@@ -1217,12 +1140,10 @@
             heroSection.style.visibility = 'visible';
             heroSection.style.opacity = '1';
             heroSection.style.background = 'linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%)';
-            heroSection.style.padding = '5px 0 10px';
+            heroSection.style.padding = '20px 0 40px';
             heroSection.style.textAlign = 'center';
-            heroSection.style.minHeight = '50px';
+            heroSection.style.minHeight = '200px';
             heroSection.style.marginTop = '0';
-            heroSection.style.zIndex = '9999';
-            heroSection.style.position = 'relative';
           }
           
           if (contentSection) {
@@ -1256,7 +1177,7 @@
             mainTitle.style.fontSize = '2.2rem';
             mainTitle.style.lineHeight = '1.2';
             mainTitle.style.color = '#2c2c2c';
-            mainTitle.style.margin = '0 0 5px';
+            mainTitle.style.margin = '0 0 20px';
           }
           
           // Force search interface visibility
@@ -1265,7 +1186,7 @@
             searchInterface.style.display = 'block';
             searchInterface.style.visibility = 'visible';
             searchInterface.style.maxWidth = '100%';
-            searchInterface.style.margin = '0 auto 5px';
+            searchInterface.style.margin = '0 auto 20px';
             searchInterface.style.padding = '0 10px';
           }
           
@@ -1277,11 +1198,11 @@
             searchBar.style.background = '#f8f8f8';
             searchBar.style.border = '2px solid rgba(255,255,255,0.5)';
             searchBar.style.borderRadius = '12px';
-            searchBar.style.padding = '10px 15px';
+            searchBar.style.padding = '15px 20px';
             searchBar.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
             searchBar.style.alignItems = 'center';
             searchBar.style.gap = '12px';
-            searchBar.style.marginBottom = '5px';
+            searchBar.style.marginBottom = '20px';
           }
           
           // Force action button visibility
