@@ -985,15 +985,266 @@
         image-rendering: crisp-edges !important;
       }
     }
+    
+    /* Mobile-Only PDF Design Styles (375px width optimized) */
+    @media (max-width: 768px) {
+      /* Force white background everywhere */
+      body.body,
+      body.body .hero-section,
+      body.body .content-section,
+      body.body .footer {
+        background: #FFFFFF !important;
+        background-color: #FFFFFF !important;
+        background-image: none !important;
+      }
+      
+      /* Header/Navbar Mobile Styling */
+      body.body .navbar {
+        padding: 12px 0 !important;
+        background: #FFFFFF !important;
+        position: static !important;
+      }
+      
+      body.body .navbar .container.nav {
+        max-width: 100% !important;
+        padding: 0 18px !important;
+      }
+      
+      body.body .brand svg {
+        width: 28px !important;
+        height: 48px !important;
+      }
+      
+      body.body .nav-home-link {
+        font-size: 12px !important;
+        color: #4E4F53 !important;
+        font-family: 'Product Sans', sans-serif !important;
+      }
+      
+      /* Hero Section Mobile Styling */
+      body.body .hero-section {
+        padding: 40px 20px 30px !important;
+        background: #FFFFFF !important;
+        margin-top: 0 !important;
+      }
+      
+      body.body .hero-content {
+        margin-bottom: 25px !important;
+      }
+      
+      body.body .main-title {
+        font-size: 1.5rem !important;
+        font-weight: 500 !important;
+        line-height: 1.21 !important;
+        margin: 0 0 6px !important;
+        font-family: 'Product Sans Medium', sans-serif !important;
+        color: #000000 !important;
+        text-align: center !important;
+      }
+      
+      body.body .subtitle {
+        font-size: 10px !important;
+        color: #4E4F53 !important;
+        font-family: 'Product Sans', sans-serif !important;
+        font-weight: 400 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 3px !important;
+      }
+      
+      /* Search Interface Mobile Styling */
+      body.body .search-interface {
+        max-width: 303px !important;
+        margin: 0 auto 20px !important;
+        padding: 0 !important;
+      }
+      
+      body.body .search-container {
+        margin-bottom: 15px !important;
+      }
+      
+      body.body .search-bar {
+        padding: 10px 14px !important;
+        border-radius: 24px !important;
+        border: 1px solid #E0E0E0 !important;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+        background: #FFFFFF !important;
+      }
+      
+      body.body .search-bar img {
+        height: 16px !important;
+        width: 16px !important;
+      }
+      
+      body.body .search-input {
+        font-size: 12px !important;
+        color: #818286 !important;
+        font-family: 'Product Sans', sans-serif !important;
+      }
+      
+      body.body .search-input::placeholder {
+        color: #818286 !important;
+      }
+      
+      body.body .action-btn {
+        padding: 8px 18px !important;
+        font-size: 11px !important;
+        border-radius: 4px !important;
+        background: #F4F4F4 !important;
+        color: #303135 !important;
+        font-family: 'Product Sans', sans-serif !important;
+        box-shadow: 0 0 1px rgba(0,0,0,0.25) !important;
+        border: none !important;
+      }
+      
+      /* Content Section Mobile Styling */
+      body.body .content-section {
+        padding: 30px 0 !important;
+      }
+      
+      body.body .content-title {
+        font-size: 1.25rem !important;
+        margin: 0 18px 15px !important;
+        font-weight: 500 !important;
+        font-family: 'Product Sans Medium', sans-serif !important;
+        line-height: 1.3 !important;
+      }
+      
+      body.body .content-text {
+        font-size: 11px !important;
+        line-height: 1.6 !important;
+        padding: 0 18px !important;
+        max-width: 340px !important;
+        margin: 0 auto !important;
+        text-align: left !important;
+      }
+      
+      body.body .content-text p {
+        font-size: 11px !important;
+        line-height: 1.6 !important;
+        margin-bottom: 12px !important;
+      }
+      
+      /* Warning Section Mobile Styling */
+      body.body .warning-section {
+        padding: 0 18px !important;
+        margin: 25px auto 35px !important;
+        max-width: 340px !important;
+      }
+      
+      body.body .warning-section h3 {
+        font-size: 1.2rem !important;
+        color: #E24538 !important;
+        font-weight: 700 !important;
+        margin: 0 0 10px !important;
+        font-family: 'Product Sans', sans-serif !important;
+      }
+      
+      body.body .warning-section p {
+        font-size: 11px !important;
+        line-height: 1.5 !important;
+        font-family: 'Product Sans', sans-serif !important;
+        margin: 0 0 20px !important;
+      }
+      
+      body.body .warning-section a {
+        background: #4486EC !important;
+        padding: 10px 26px !important;
+        font-size: 11px !important;
+        border-radius: 4px !important;
+        font-family: 'Product Sans', sans-serif !important;
+        color: #FFFFFF !important;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1) !important;
+      }
+      
+      /* Rainbow Separator Mobile Styling */
+      body.body .rainbow-separator {
+        margin: 35px 0 0 !important;
+        height: 5px !important;
+        border-radius: 1000px !important;
+      }
+      
+      /* Footer Mobile Styling */
+      body.body .footer {
+        padding: 25px 18px !important;
+        background: #FFFFFF !important;
+      }
+      
+      body.body .footer .container {
+        max-width: 340px !important;
+      }
+      
+      body.body .f1 {
+        margin-bottom: 18px !important;
+      }
+      
+      body.body .f-logo-container svg {
+        width: 113px !important;
+        height: 54px !important;
+      }
+      
+      body.body .f-slogan {
+        font-size: 9px !important;
+        padding: 5px 10px !important;
+        font-family: 'Product Sans', sans-serif !important;
+      }
+      
+      body.body .f-copyright {
+        font-size: 7px !important;
+        margin-top: 8px !important;
+        font-family: 'Product Sans', sans-serif !important;
+        color: #000000 !important;
+      }
+      
+      body.body .f2 {
+        display: grid !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 10px !important;
+        margin-top: 18px !important;
+      }
+      
+      body.body .footer-btn {
+        padding: 9px 12px !important;
+        font-size: 11px !important;
+        font-family: 'Product Sans', sans-serif !important;
+        min-height: 38px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      
+      /* Desktop-Only Elements - Hide on Mobile */
+      body.body .social-icons,
+      body.body .desktop-only {
+        display: none !important;
+      }
+    }
   </style>
 </head>
 <body class="body">
   <div class="navbar w-nav" role="banner">
-    <div class="container nav">
-      <a href="index.html" class="brand w-inline-block"><img src="images/Group-47740.svg" alt="1st Impression" class="logo"></a>
-      <nav role="navigation" class="nav-menu w-nav-menu">
-        <a href="index.html#contact" class="button w-button">Free Audit</a>
-        <a href="index.html" class="button w-button mobile-home-btn" style="display: none;">Home</a>
+    <div class="container nav" style="display: flex; justify-content: space-between; align-items: center; padding: 15px 20px;">
+      <!-- Colorful "1" Logo (Left) -->
+      <a href="index.html" class="brand w-inline-block" style="position: relative;">
+        <svg width="32" height="56" viewBox="0 0 32 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Blue Rectangle -->
+          <rect x="10" y="5" width="22" height="10" fill="#4486EC" transform="rotate(-34 20 15)" rx="2"/>
+          <!-- Yellow Rectangle -->
+          <rect x="12" y="12" width="22" height="6" fill="#F7BD15" transform="rotate(-34 20 18)" rx="2"/>
+          <!-- Red Rectangle -->
+          <rect x="11" y="16" width="22" height="5" fill="#E24538" transform="rotate(-34 20 20)" rx="2"/>
+          <!-- Green Rectangle -->
+          <rect x="14" y="22" width="25" height="8" fill="#36B157" transform="rotate(-34 20 28)" rx="2"/>
+          <!-- Yellow "1" -->
+          <rect x="7" y="30" width="7" height="23" fill="#F7BD15" rx="1"/>
+          <rect x="0" y="47" width="14" height="5" fill="#F7BD15" rx="1"/>
+        </svg>
+      </a>
+      
+      <!-- Home Link (Right) - Desktop and Mobile -->
+      <nav role="navigation" class="nav-menu">
+        <a href="index.html" class="nav-home-link" style="font-family: 'Product Sans', sans-serif; font-size: 16px; color: #4E4F53; text-decoration: none;">Home</a>
       </nav>
     </div>
   </div>
@@ -1002,37 +1253,47 @@
   <section class="hero-section" style="background: linear-gradient(135deg, #f5f5f5 0%, #ffffff 100%); padding: 80px 0 120px; text-align: center;">
     <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
       <!-- Logo and Title -->
-      <div class="hero-content" style="margin-bottom: 60px;">
-        <div style="position: relative; display: inline-block;">
-          <h1 class="main-title" style="font-size: 4rem; font-weight: 700; color: #2c2c2c; margin: 0; line-height: 1.1;">
-            Knowledge Graph Explorer
-          </h1>
-          <p class="subtitle" style="position: absolute; bottom: -10px; right: 0; font-size: 1rem; color: #666; margin: 0; white-space: nowrap;">
-            by <img src="images/Group-47740.svg" alt="1st Impression" style="height: 16px; vertical-align: middle; margin-left: 4px;">
-          </p>
-        </div>
+      <div class="hero-content" style="margin-bottom: 40px; text-align: center;">
+        <h1 class="main-title" style="font-size: 3rem; font-weight: 500; color: #000000; margin: 0 0 10px; line-height: 1.2; font-family: 'Product Sans Medium', sans-serif;">
+          Knowledge<br>Graph Explorer
+        </h1>
+        <p class="subtitle" style="font-size: 0.8rem; color: #4E4F53; margin: 0; display: flex; align-items: center; justify-content: center; gap: 4px;">
+          <span>by</span>
+          <svg width="10" height="20" viewBox="0 0 10 20" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle;">
+            <!-- Miniature colored rectangles for "1" -->
+            <rect x="2" y="1" width="6" height="3" fill="#4486EC" transform="rotate(-34 5 3)" rx="0.5"/>
+            <rect x="2.5" y="3" width="6" height="1.5" fill="#F7BD15" transform="rotate(-34 5 4.5)" rx="0.5"/>
+            <rect x="2" y="4" width="6" height="1.3" fill="#E24538" transform="rotate(-34 5 5)" rx="0.5"/>
+            <rect x="3" y="6" width="7" height="2" fill="#36B157" transform="rotate(-34 5 7)" rx="0.5"/>
+            <!-- Yellow "1" -->
+            <rect x="2" y="10" width="2" height="8" fill="#F7BD15" rx="0.3"/>
+            <rect x="0" y="16" width="4" height="2" fill="#F7BD15" rx="0.3"/>
+          </svg>
+          <span style="font-weight: 400;">st</span>
+          <span style="font-weight: 400;">impression</span>
+        </p>
       </div>
 
       <!-- Search Interface -->
-      <div class="search-interface" style="max-width: 800px; margin: 0 auto 60px;">
-        <div class="search-container" style="position: relative; margin-bottom: 30px;">
-          <div class="search-bar" style="background: #f8f8f8; border: 3px solid rgba(255,255,255,0.5); border-radius: 15px; padding: 20px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 15px; transition: all 0.3s ease;">
-            <img src="images/Search.png" alt="search" style="height: 24px; width: 24px; opacity: 0.6; flex-shrink: 0;">
-            <input class="search-input" id="kg-query" type="text" placeholder="Search your name..." required style="flex: 1; border: none; background: transparent; font-size: 1.1rem; color: #2c2c2c; outline: none; min-width: 0;">
+      <div class="search-interface" style="max-width: 350px; margin: 0 auto 40px;">
+        <div class="search-container" style="position: relative; margin-bottom: 20px;">
+          <div class="search-bar" style="background: #FFFFFF; border: 1px solid #E0E0E0; border-radius: 24px; padding: 12px 18px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; transition: all 0.3s ease;">
+            <img src="images/Search.png" alt="search" style="height: 18px; width: 18px; opacity: 0.5; flex-shrink: 0;">
+            <input class="search-input" id="kg-query" type="text" placeholder="Search your name..." required style="flex: 1; border: none; background: transparent; font-size: 0.9rem; color: #818286; font-family: 'Product Sans', sans-serif; outline: none; min-width: 0;">
             <button type="button" class="clear-search" id="clear-search" style="display: none; background: none; border: none; color: #666; cursor: pointer; padding: 4px; border-radius: 4px; font-size: 18px; line-height: 1;">×</button>
           </div>
         </div>
 
         <!-- Action Buttons -->
-        <div class="action-buttons" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-          <button class="action-btn search-gkps" id="search-gkps-btn" style="background: #f4f4f4; border: 3px solid rgba(255,255,255,0.5); border-radius: 15px; padding: 20px 40px; font-size: 1.1rem; font-weight: 400; color: #2c2c2c; cursor: pointer; box-shadow: 0 4px 20px rgba(0,0,0,0.1); transition: all 0.3s ease; min-height: 60px;">
+        <div class="action-buttons" style="display: flex; justify-content: center;">
+          <button class="action-btn search-gkps" id="search-gkps-btn" style="background: #F4F4F4; border: none; border-radius: 8px; padding: 10px 24px; font-size: 0.85rem; font-weight: 400; color: #303135; font-family: 'Product Sans', sans-serif; cursor: pointer; box-shadow: 0 0 2px rgba(0,0,0,0.25); transition: all 0.3s ease;">
             Search GKPs
           </button>
         </div>
       </div>
 
-      <!-- Social Media Icons -->
-      <div class="social-icons" style="display: flex; justify-content: center; gap: 30px; margin-bottom: 1px;">
+      <!-- Social Media Icons - Hidden on Mobile per PDF design -->
+      <div class="social-icons desktop-only" style="display: flex; justify-content: center; gap: 30px; margin-bottom: 1px;">
         <a href="https://www.linkedin.com/company/1stimpression-com/" target="_blank" style="display: inline-block; transition: transform 0.3s ease;">
           <svg width="50" height="50" viewBox="0 0 50 50" style="background: #0077b5; border-radius: 8px;">
             <text x="25" y="32" font-family="Arial, sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="white">in</text>
@@ -1052,28 +1313,33 @@
   <section class="content-section" style="padding: 1px 0; background: #ffffff;">
     <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 20px;">
       <div id="info" style="text-align: center;">
-        <h2 class="content-title" style="font-size: 3rem; font-weight: 700; color: #2c2c2c; margin: 0 0 30px; line-height: 1.2;">
-          What is a <span style="color: #4285f4;">G</span><span style="color: #ea4335;">o</span><span style="color: #fbbc05;">o</span><span style="color: #34a853;">g</span><span style="color: #4285f4;">l</span><span style="color: #ea4335;">e</span> Knowledge Panel?
+        <h2 class="content-title" style="font-size: 1.8rem; font-weight: 500; color: #303135; margin: 0 0 20px; line-height: 1.3; font-family: 'Product Sans Medium', sans-serif;">
+          What is a <span style="color: #4285f4;">G</span><span style="color: #ea4335;">o</span><span style="color: #fbbc05;">o</span><span style="color: #34a853;">g</span><span style="color: #4285f4;">l</span><span style="color: #ea4335;">e</span> Knowl<span style="color: #E24538;">e</span>dge Pan<span style="color: #36B157;">e</span><span style="color: #4486EC;">l</span><span style="color: #F7BD15;">?</span>
         </h2>
-        <div class="content-text" style="font-size: 1.2rem; line-height: 1.6; color: #555; max-width: 800px; margin: 0 auto;">
-          <p style="margin: 0 0 20px;">
-            A Google Knowledge Panel (aka GKP) serves as a critical indicator of authority and visibility on the internet. It's the fancy, yet concise information box that appears during a Google search, typically on the right-hand side. GKPs showcase essential details such as your biography, accomplishments, recent links to social media profiles, articles published, and notable experiences.
+        <div class="content-text" style="font-size: 0.9rem; line-height: 1.6; color: #000000; max-width: 340px; margin: 0 auto; font-family: 'Product Sans', sans-serif; text-align: left;">
+          <p style="margin: 0 0 15px;">
+            A <strong>Google Knowledge Panel</strong> (aka GKP) serves as a critical indicator of authority and visibility on the internet. It's the fancy, yet concise information box that appears during a Google search, typically on the right-hand side.
           </p>
-          <p style="margin: 0 0 20px;">
-            They significantly enhance discoverability and signal to potential clients, investors, or followers that your brand is credible and well-established.<br><br>
-            Note: Most Knowledge Panels are NOT created equally...
+          <p style="margin: 0 0 15px;">
+            GKPs showcase <strong>essential details</strong> such as your biography, accomplishments, recent links to social media profiles, articles published, and notable experiences.
+          </p>
+          <p style="margin: 0 0 15px;">
+            They <strong>significantly enhance discoverability</strong> and signal to potential clients, investors, or followers that your brand is <strong>credible</strong> and <strong>well-established</strong>.
+          </p>
+          <p style="margin: 0 0 15px;">
+            <span style="color: #4486EC; font-weight: 500;">Note:</span> Most Knowledge Panels are <strong>NOT</strong> created equally...
           </p>
         </div>
       </div>
 
       <!-- Warning Section -->
-      <div class="warning-section" style="margin: 60px auto 90px; max-width: 800px; text-align: center;">
-        <h3 style="color: #e74c3c; font-size: 1.8rem; font-weight: 700; margin: 0 0 15px;">WARNING</h3>
-        <p style="color: #2c2c2c; font-size: 1.1rem; line-height: 1.5; margin: 0 0 30px; font-weight: 600;">
+      <div class="warning-section" style="margin: 40px auto 50px; max-width: 340px; text-align: center;">
+        <h3 style="color: #E24538; font-size: 1.5rem; font-weight: 700; margin: 0 0 12px; font-family: 'Product Sans', sans-serif;">WARNING</h3>
+        <p style="color: #000000; font-size: 0.9rem; line-height: 1.5; margin: 0 0 25px; font-weight: 400; font-family: 'Product Sans', sans-serif;">
           Consult with an SEO professional before attempting to build one on your own or hiring a 'cost-effective' service provider you found on a freelance site.
         </p>
         <!-- CTA Button -->
-        <a href="https://calendar.app.google/D2WoiU27dQKDwbFv6" target="_blank" style="display: inline-block; background: #4285f4; border: 2px solid #ffffff; border-radius: 15px; padding: 20px 40px; font-size: 1.2rem; font-weight: 400; color: #ffffff; text-decoration: none; transition: all 0.3s ease;">
+        <a href="https://calendar.app.google/D2WoiU27dQKDwbFv6" target="_blank" style="display: inline-block; background: #4486EC; border: none; border-radius: 8px; padding: 12px 32px; font-size: 0.95rem; font-weight: 400; color: #FFFFFF; text-decoration: none; font-family: 'Product Sans', sans-serif; transition: all 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
           Book a Free Consultation
         </a>
       </div>
@@ -1091,23 +1357,48 @@
   </section>
 
   <!-- Rainbow Separator -->
-  <div style="width: 100%; height: 4px; background: linear-gradient(90deg, #4285f4 0%, #ea4335 25%, #fbbc05 50%, #34a853 75%, #4285f4 100%);"></div>
+  <div class="rainbow-separator" style="width: 100%; height: 5px; background: linear-gradient(90deg, #4285f4 0%, #ea4335 25%, #fbbc05 50%, #34a853 75%, #4285f4 100%); margin: 40px 0 0;"></div>
 
   <!-- Footer Section -->
-  <section class="footer" style="background: #ffffff; color: #2c2c2c; padding: 60px 0 40px;">
-    <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+  <section class="footer" style="background: #ffffff; color: #2c2c2c; padding: 40px 20px;">
+    <div class="container" style="max-width: 400px; margin: 0 auto; text-align: center;">
       <div class="footer-content">
-        <div class="f1"><img src="images/Group-47740.svg" loading="lazy" alt="" class="f-logo">
-          <div class="f-slogan">Reinventing the 1st impression.</div>
-          <div class="f-copyright"><span class="text-span">©</span> 2025 -- 1STIMPRESSION.COM -- ALL RIGHTS RESERVED</div>
-        </div>
-        <div class="f2">
-          <div class="w-layout-hflex f-links">
-            <a href="index.html#contact" class="button grey w-button">Book a call</a>
-            <a href="index.html#contact" class="button grey w-button">Partner with us</a>
-            <a href="index.html#contact" class="button grey w-button">Free audit</a>
-            <a href="index.html" class="button grey w-button">Home</a>
+        <!-- Large 1st Impression Logo -->
+        <div class="f1" style="margin-bottom: 20px;">
+          <div class="f-logo-container" style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px;">
+            <svg width="113" height="54" viewBox="0 0 113 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Colored rectangles for "1" -->
+              <rect x="10" y="3" width="26" height="11" fill="#4486EC" transform="rotate(-34 23 8)" rx="2"/>
+              <rect x="12" y="10" width="26" height="6" fill="#F7BD15" transform="rotate(-34 23 13)" rx="2"/>
+              <rect x="11" y="14" width="26" height="6" fill="#E24538" transform="rotate(-34 23 17)" rx="2"/>
+              <rect x="15" y="21" width="29" height="9" fill="#36B157" transform="rotate(-34 23 25)" rx="2"/>
+              <!-- Yellow "1" stem and base -->
+              <rect x="7" y="28" width="8" height="23" fill="#F7BD15" rx="1"/>
+              <rect x="0" y="46" width="15" height="5" fill="#F7BD15" rx="1"/>
+              <!-- "st" text -->
+              <text x="20" y="48" font-family="Product Sans, sans-serif" font-size="12" font-weight="400" fill="#000000">st</text>
+              <!-- "impression" text -->
+              <text x="32" y="48" font-family="Product Sans, sans-serif" font-size="14" font-weight="400" fill="#000000">impression</text>
+            </svg>
           </div>
+          
+          <!-- Black Rectangle with Tagline -->
+          <div style="background: #000000; padding: 6px 12px; border-radius: 2px; margin-bottom: 8px;">
+            <div class="f-slogan" style="color: #FFFFFF; font-size: 0.7rem; font-family: 'Product Sans', sans-serif; font-weight: 400;">Reinventing the 1st impression.</div>
+          </div>
+          
+          <!-- Copyright -->
+          <div class="f-copyright" style="font-size: 0.5rem; color: #000000; font-family: 'Product Sans', sans-serif; margin-top: 8px;">
+            <span>©2025 -- 1STIMPRESSION.COM -- ALL RIGHTS RESERVED</span>
+          </div>
+        </div>
+        
+        <!-- Footer Buttons in Grid -->
+        <div class="f2" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px;">
+          <a href="index.html#contact" class="footer-btn" style="background: #F4F4F4; border: 1px solid rgba(0,0,0,0.2); box-shadow: 0 4px 4px rgba(0,0,0,0.25); border-radius: 4px; padding: 10px; font-size: 0.85rem; color: #303135; text-decoration: none; font-family: 'Product Sans', sans-serif; display: block; text-align: center;">Book a call</a>
+          <a href="index.html#contact" class="footer-btn" style="background: #F4F4F4; border: 1px solid rgba(0,0,0,0.2); box-shadow: 0 4px 4px rgba(0,0,0,0.25); border-radius: 4px; padding: 10px; font-size: 0.85rem; color: #303135; text-decoration: none; font-family: 'Product Sans', sans-serif; display: block; text-align: center;">Free audit</a>
+          <a href="index.html" class="footer-btn" style="background: #F4F4F4; border: 1px solid rgba(0,0,0,0.2); box-shadow: 0 4px 4px rgba(0,0,0,0.25); border-radius: 4px; padding: 10px; font-size: 0.85rem; color: #303135; text-decoration: none; font-family: 'Product Sans', sans-serif; display: block; text-align: center;">Home</a>
+          <a href="index.html#contact" class="footer-btn" style="background: #F4F4F4; border: 1px solid rgba(0,0,0,0.2); box-shadow: 0 4px 4px rgba(0,0,0,0.25); border-radius: 4px; padding: 10px; font-size: 0.85rem; color: #303135; text-decoration: none; font-family: 'Product Sans', sans-serif; display: block; text-align: center;">Partner with us</a>
         </div>
       </div>
     </div>
