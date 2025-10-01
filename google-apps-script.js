@@ -30,11 +30,24 @@ function doPost(e) {
     const spreadsheetId = '1JY01Ka3QJMw2HDmo6UFSxsbq1f-02amr48NlJDIFdF4';
     const sheet = SpreadsheetApp.openById(spreadsheetId).getActiveSheet();
     
-    // Get IP address from the request
-    const ipAddress = e.parameter.ip || e.parameter.remote_addr || 
-                     e.parameter['X-Forwarded-For'] || 
-                     e.parameter['X-Real-IP'] || 
-                     data.ipAddress || '';
+    // Get IP address from the request - for GET requests, we need to get it differently
+    let ipAddress = '';
+    
+    // Try to get IP from various sources
+    if (e.parameter.ip) {
+      ipAddress = e.parameter.ip;
+    } else if (e.parameter.remote_addr) {
+      ipAddress = e.parameter.remote_addr;
+    } else if (e.parameter['X-Forwarded-For']) {
+      ipAddress = e.parameter['X-Forwarded-For'];
+    } else if (e.parameter['X-Real-IP']) {
+      ipAddress = e.parameter['X-Real-IP'];
+    } else if (data.ipAddress) {
+      ipAddress = data.ipAddress;
+    } else {
+      // For GET requests, we can't easily get the real IP, so we'll use a placeholder
+      ipAddress = 'Unknown';
+    }
     
     // Get location data from IP
     const locationData = getLocationFromIP(ipAddress);
@@ -258,7 +271,8 @@ function getLocationFromIP(ipAddress) {
   }
   
   try {
-    const response = UrlFetchApp.fetch('http://ipapi.co/' + ipAddress + '/json/', {
+    // Try ipapi.co first
+    const response = UrlFetchApp.fetch('https://ipapi.co/' + ipAddress + '/json/', {
       'muteHttpExceptions': true
     });
     
@@ -272,7 +286,26 @@ function getLocationFromIP(ipAddress) {
       };
     }
   } catch (error) {
-    console.log('Error fetching location data:', error);
+    console.log('Error fetching location data from ipapi.co:', error);
+  }
+  
+  // Fallback to ip-api.com
+  try {
+    const response2 = UrlFetchApp.fetch('http://ip-api.com/json/' + ipAddress, {
+      'muteHttpExceptions': true
+    });
+    
+    if (response2.getResponseCode() === 200) {
+      const data = JSON.parse(response2.getContentText());
+      return {
+        country: data.country || 'Unknown',
+        region: data.regionName || 'Unknown',
+        city: data.city || 'Unknown',
+        timezone: data.timezone || 'Unknown'
+      };
+    }
+  } catch (error) {
+    console.log('Error fetching location data from ip-api.com:', error);
   }
   
   return {
