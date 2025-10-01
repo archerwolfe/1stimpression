@@ -291,11 +291,55 @@
       // Get language
       var language = navigator.language || navigator.userLanguage || '';
       
-      // Get country from language/locale
+      // Get country from language/locale and timezone
       var country = 'Unknown';
       console.log('Browser language detected:', language); // Debug log
       
-      if (language) {
+      // Get timezone for better country detection
+      var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      console.log('Browser timezone detected:', timezone); // Debug log
+      
+      // Try timezone-based country detection first (more accurate)
+      var timezoneCountryMap = {
+        'Asia/Bangkok': 'Thailand',
+        'America/New_York': 'United States', 'America/Los_Angeles': 'United States', 'America/Chicago': 'United States',
+        'America/Denver': 'United States', 'America/Phoenix': 'United States', 'America/Anchorage': 'United States',
+        'America/Toronto': 'Canada', 'America/Vancouver': 'Canada', 'America/Montreal': 'Canada',
+        'Europe/London': 'United Kingdom', 'Europe/Dublin': 'Ireland',
+        'Europe/Berlin': 'Germany', 'Europe/Paris': 'France', 'Europe/Madrid': 'Spain',
+        'Europe/Rome': 'Italy', 'Europe/Amsterdam': 'Netherlands', 'Europe/Stockholm': 'Sweden',
+        'Europe/Oslo': 'Norway', 'Europe/Copenhagen': 'Denmark', 'Europe/Helsinki': 'Finland',
+        'Europe/Zurich': 'Switzerland', 'Europe/Vienna': 'Austria', 'Europe/Brussels': 'Belgium',
+        'Europe/Lisbon': 'Portugal', 'Europe/Warsaw': 'Poland', 'Europe/Prague': 'Czech Republic',
+        'Europe/Budapest': 'Hungary', 'Europe/Bratislava': 'Slovakia', 'Europe/Ljubljana': 'Slovenia',
+        'Europe/Zagreb': 'Croatia', 'Europe/Sofia': 'Bulgaria', 'Europe/Bucharest': 'Romania',
+        'Europe/Athens': 'Greece', 'Europe/Nicosia': 'Cyprus', 'Europe/Valletta': 'Malta',
+        'Europe/Luxembourg': 'Luxembourg', 'Europe/Tallinn': 'Estonia', 'Europe/Riga': 'Latvia',
+        'Europe/Vilnius': 'Lithuania', 'Asia/Tokyo': 'Japan', 'Asia/Seoul': 'South Korea',
+        'Asia/Shanghai': 'China', 'Asia/Taipei': 'Taiwan', 'Asia/Hong_Kong': 'Hong Kong',
+        'Asia/Singapore': 'Singapore', 'Asia/Kuala_Lumpur': 'Malaysia', 'Asia/Ho_Chi_Minh': 'Vietnam',
+        'Asia/Jakarta': 'Indonesia', 'Asia/Manila': 'Philippines', 'Asia/Kolkata': 'India',
+        'Asia/Karachi': 'Pakistan', 'Asia/Dhaka': 'Bangladesh', 'Asia/Colombo': 'Sri Lanka',
+        'America/Mexico_City': 'Mexico', 'America/Sao_Paulo': 'Brazil', 'America/Argentina/Buenos_Aires': 'Argentina',
+        'America/Santiago': 'Chile', 'America/Bogota': 'Colombia', 'America/Lima': 'Peru',
+        'America/Caracas': 'Venezuela', 'America/Montevideo': 'Uruguay', 'America/Asuncion': 'Paraguay',
+        'America/La_Paz': 'Bolivia', 'America/Guayaquil': 'Ecuador', 'America/Guyana': 'Guyana',
+        'America/Paramaribo': 'Suriname', 'Africa/Johannesburg': 'South Africa', 'Africa/Lagos': 'Nigeria',
+        'Africa/Nairobi': 'Kenya', 'Africa/Cairo': 'Egypt', 'Africa/Casablanca': 'Morocco',
+        'Africa/Tunis': 'Tunisia', 'Africa/Algiers': 'Algeria', 'Europe/Moscow': 'Russia',
+        'Europe/Kiev': 'Ukraine', 'Europe/Minsk': 'Belarus', 'Asia/Almaty': 'Kazakhstan',
+        'Asia/Tashkent': 'Uzbekistan', 'Europe/Istanbul': 'Turkey', 'Asia/Jerusalem': 'Israel',
+        'Asia/Dubai': 'United Arab Emirates', 'Asia/Riyadh': 'Saudi Arabia', 'Asia/Kuwait': 'Kuwait',
+        'Asia/Qatar': 'Qatar', 'Asia/Bahrain': 'Bahrain', 'Asia/Muscat': 'Oman', 'Asia/Amman': 'Jordan',
+        'Asia/Beirut': 'Lebanon', 'Asia/Damascus': 'Syria', 'Asia/Baghdad': 'Iraq',
+        'Asia/Tehran': 'Iran', 'Asia/Kabul': 'Afghanistan'
+      };
+      
+      if (timezone && timezoneCountryMap[timezone]) {
+        country = timezoneCountryMap[timezone];
+        console.log('Country detected from timezone:', country);
+      } else if (language) {
+        // Fallback to language-based detection
         var localeParts = language.split('-');
         console.log('Language parts:', localeParts); // Debug log
         
@@ -325,7 +369,7 @@
             'LB': 'Lebanon', 'SY': 'Syria', 'IQ': 'Iraq', 'IR': 'Iran', 'AF': 'Afghanistan'
           };
           country = countryMap[countryCode] || 'Unknown';
-          console.log('Detected country:', country); // Debug log
+          console.log('Detected country from language:', country); // Debug log
         } else {
           // Try to detect from just the language part
           var langCode = localeParts[0];
