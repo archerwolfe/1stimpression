@@ -1551,13 +1551,21 @@
               button.style.width = '100%';
               button.style.minHeight = '44px';
               
-              // Ensure the href attribute is preserved and functional
+              // CRITICAL: Preserve the original href and ensure it works exactly like desktop
+              // DO NOT override the href - let the original JavaScript handle it
+              console.log('Mobile green button href:', button.href);
+              
+              // Only add click handler if href exists and contains kgmid
               if (button.href && button.href.includes('kgmid=')) {
-                // The button already has the correct kgmid URL, ensure it's clickable
-                button.onclick = function(e) {
+                // Remove any existing onclick handlers to prevent conflicts
+                button.onclick = null;
+                
+                // Add a simple click handler that preserves the original href
+                button.addEventListener('click', function(e) {
                   e.preventDefault();
+                  console.log('Mobile button clicked, opening:', button.href);
                   window.open(button.href, '_blank');
-                };
+                });
               }
             }
           });
@@ -1574,7 +1582,11 @@
           // Wait for search results to be rendered, then fix button functionality
           setTimeout(function() {
             const greenButtons = document.querySelectorAll('.green-button');
-            greenButtons.forEach(function(button) {
+            console.log('Found', greenButtons.length, 'green buttons on mobile');
+            
+            greenButtons.forEach(function(button, index) {
+              console.log('Button', index, 'href:', button.href);
+              
               // Ensure the button has the correct href and is clickable
               if (button.href && button.href.includes('kgmid=')) {
                 button.style.pointerEvents = 'auto';
@@ -1582,14 +1594,20 @@
                 button.style.zIndex = '999';
                 button.style.position = 'relative';
                 
-                // Add click handler as backup
-                button.onclick = function(e) {
+                // Remove any existing click handlers to prevent conflicts
+                button.onclick = null;
+                
+                // Add click handler that preserves the original href
+                button.addEventListener('click', function(e) {
                   e.preventDefault();
+                  console.log('Mobile post-search button clicked, opening:', button.href);
                   window.open(button.href, '_blank');
-                };
+                });
+              } else {
+                console.log('Button', index, 'does not have kgmid URL:', button.href);
               }
             });
-          }, 1000); // Wait 1 second for results to render
+          }, 1500); // Wait 1.5 seconds for results to render
         }
       }
       
