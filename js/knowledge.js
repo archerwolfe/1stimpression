@@ -81,13 +81,14 @@
       var cardHeader = document.createElement('div');
       cardHeader.className = 'result-card-header';
 
-      if (imageUrl) {
-        var img = document.createElement('img');
-        img.src = imageUrl;
-        img.alt = name;
-        img.className = 'result-card-image';
-        cardHeader.appendChild(img);
-      }
+      // Image loading disabled per user request
+      // if (imageUrl) {
+      //   var img = document.createElement('img');
+      //   img.src = imageUrl;
+      //   img.alt = name;
+      //   img.className = 'result-card-image';
+      //   cardHeader.appendChild(img);
+      // }
 
       var titleSection = document.createElement('div');
       titleSection.style.flex = '1';
@@ -130,14 +131,15 @@
       var buttonContainer = document.createElement('div');
       buttonContainer.className = 'result-card-buttons';
 
-      if (url) {
-        var learnMoreBtn = document.createElement('a');
-        learnMoreBtn.href = url;
-        learnMoreBtn.target = '_blank';
-        learnMoreBtn.className = 'button grey _2 w-button result-card-button';
-        learnMoreBtn.textContent = 'Learn more';
-        buttonContainer.appendChild(learnMoreBtn);
-      }
+      // Learn more button removed per user request
+      // if (url) {
+      //   var learnMoreBtn = document.createElement('a');
+      //   learnMoreBtn.href = url;
+      //   learnMoreBtn.target = '_blank';
+      //   learnMoreBtn.className = 'button grey _2 w-button result-card-button';
+      //   learnMoreBtn.textContent = 'Learn more';
+      //   buttonContainer.appendChild(learnMoreBtn);
+      // }
 
       // Google Knowledge Panel button
       var kgmidRaw = entity['@id'] || null;
