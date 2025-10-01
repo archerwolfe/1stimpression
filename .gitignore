@@ -1,5 +1,19 @@
-js/config.js
-node_modules/
+# Ignore everything except the website files
+*
+!index.html
+!knowledge.html
+!css/
+!js/
+!images/
+!fonts/
+!*.md
+!google-apps-script.js
+!DEPLOYMENT_STEPS.md
+!SETUP_INSTRUCTIONS.md
+!analytics-dashboard-template.md
+
+# Ignore system files
 .DS_Store
 Thumbs.db
-
+*.log
+node_modules/

@@ -255,7 +255,11 @@
     fetch('https://kgsearch.googleapis.com/v1/entities:search?' + params.toString())
       .then(function (res) { return res.json(); })
       .then(function (data) {
-        renderResults(data && data.itemListElement ? data.itemListElement : []);
+        var results = data && data.itemListElement ? data.itemListElement : [];
+        renderResults(results);
+        
+        // Log search data to Google Sheets
+        logSearchData(query, results);
       })
       .catch(function () {
         renderResults([]);
@@ -264,6 +268,69 @@
         err.textContent = 'Error fetching results.';
         resultsEl.appendChild(err);
       });
+  }
+
+  // Generate or retrieve session ID
+  function getSessionId() {
+    var sessionId = sessionStorage.getItem('kg_session_id');
+    if (!sessionId) {
+      sessionId = 'kg_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      sessionStorage.setItem('kg_session_id', sessionId);
+    }
+    return sessionId;
+  }
+
+  // Log search data to Google Sheets
+  function logSearchData(query, results) {
+    try {
+      // Get screen resolution
+      var screenResolution = screen.width + 'x' + screen.height;
+      
+      // Get language
+      var language = navigator.language || navigator.userLanguage || '';
+      
+      // Prepare search data
+      var searchData = {
+        query: query,
+        userAgent: navigator.userAgent,
+        ipAddress: '', // Will be detected by server
+        referrer: document.referrer || '',
+        resultsCount: results.length,
+        topResultName: results.length > 0 && results[0].result ? results[0].result.name : '',
+        topResultScore: results.length > 0 ? (results[0].resultScore || 0) : 0,
+        sessionId: getSessionId(),
+        timestamp: new Date().toISOString(),
+        language: language,
+        screenResolution: screenResolution,
+        searchDuration: performance.now() // Time since page load
+      };
+
+      // Send data to Google Apps Script
+      var webAppUrl = (window.KG_CONFIG && window.KG_CONFIG.TRACKING_URL) || 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+      
+      if (webAppUrl && webAppUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
+        fetch(webAppUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(searchData)
+        })
+        .then(function(response) {
+          return response.json();
+        })
+        .then(function(data) {
+          console.log('Search data logged successfully:', data);
+        })
+        .catch(function(error) {
+          console.log('Error logging search data:', error);
+        });
+      } else {
+        console.log('Google Apps Script URL not configured. Search data:', searchData);
+      }
+    } catch (error) {
+      console.log('Error preparing search data:', error);
+    }
   }
 
   // Update results section visibility
