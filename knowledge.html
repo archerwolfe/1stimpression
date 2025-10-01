@@ -1513,6 +1513,45 @@
             actionBtn.style.maxWidth = '250px';
             actionBtn.style.textAlign = 'center';
           }
+          
+          // Force result cards visibility and ensure buttons work
+          const resultCards = document.querySelectorAll('.result-card');
+          resultCards.forEach(function(card) {
+            card.style.display = 'block';
+            card.style.visibility = 'visible';
+            card.style.opacity = '1';
+            card.style.pointerEvents = 'auto';
+            card.style.cursor = 'default';
+            card.style.zIndex = '5';
+            card.style.position = 'relative';
+          });
+          
+          // Force result card buttons visibility and functionality
+          const resultCardButtons = document.querySelectorAll('.result-card-button, .green-button');
+          resultCardButtons.forEach(function(button) {
+            button.style.display = 'inline-block';
+            button.style.visibility = 'visible';
+            button.style.opacity = '1';
+            button.style.pointerEvents = 'auto';
+            button.style.cursor = 'pointer';
+            button.style.zIndex = '10';
+            button.style.position = 'relative';
+            
+            // Ensure green buttons have proper styling
+            if (button.classList.contains('green-button')) {
+              button.style.background = '#34a853';
+              button.style.color = '#ffffff';
+              button.style.border = '2px solid #34a853';
+              button.style.borderRadius = '8px';
+              button.style.padding = '12px 20px';
+              button.style.fontSize = '0.9rem';
+              button.style.fontWeight = '500';
+              button.style.textDecoration = 'none';
+              button.style.boxShadow = '0 2px 4px rgba(52, 168, 83, 0.3)';
+              button.style.width = '100%';
+              button.style.minHeight = '44px';
+            }
+          });
         }
       }
       
