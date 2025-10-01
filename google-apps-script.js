@@ -129,8 +129,8 @@ function doPost(e) {
 
 function doGet(e) {
   try {
-    // Handle JSONP requests from website
-    if (e.parameter.callback) {
+    // Handle tracking requests from website
+    if (e.parameter.query) {
       var data = {
         query: e.parameter.query || '',
         userAgent: e.parameter.userAgent || '',
@@ -149,13 +149,10 @@ function doGet(e) {
       // Log to spreadsheet
       logToSpreadsheet(data);
       
-      // Return JSONP response
-      var callback = e.parameter.callback;
-      var response = callback + '(' + JSON.stringify({success: true, message: 'Data logged successfully'}) + ');';
-      
+      // Return a simple 1x1 pixel image
       return ContentService
-        .createTextOutput(response)
-        .setMimeType(ContentService.MimeType.JAVASCRIPT);
+        .createTextOutput('')
+        .setMimeType(ContentService.MimeType.TEXT);
     }
     
     // Handle regular GET requests (for testing)
@@ -163,12 +160,10 @@ function doGet(e) {
       .createTextOutput(JSON.stringify({message: 'Knowledge Graph Search Tracker is running'}))
       .setMimeType(ContentService.MimeType.JSON);
   } catch (error) {
-    var callback = e.parameter.callback || 'console.log';
-    var response = callback + '(' + JSON.stringify({success: false, error: error.toString()}) + ');';
-    
+    // Return empty response on error
     return ContentService
-      .createTextOutput(response)
-      .setMimeType(ContentService.MimeType.JAVASCRIPT);
+      .createTextOutput('')
+      .setMimeType(ContentService.MimeType.TEXT);
   }
 }
 

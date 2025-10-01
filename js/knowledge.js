@@ -311,7 +311,7 @@
       var webAppUrl = (window.KG_CONFIG && window.KG_CONFIG.TRACKING_URL) || 'https://script.google.com/macros/s/AKfycbzvpoh5VvKen77gHAtZvYonAQtHCs5Gu4ehyt7dgPZpZbndZsudOxDmh2O0dsDiKPs/exec';
       
       if (webAppUrl && webAppUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
-        // Use image pixel method to bypass CORS (simplest approach)
+        // Use simple image pixel method (no callbacks needed)
         var img = new Image();
         var params = new URLSearchParams();
         
@@ -322,15 +322,10 @@
           }
         });
         
-        // Add callback parameter for JSONP
-        params.append('callback', 'kgCallback');
+        // Create the URL and trigger the request
+        var trackingUrl = webAppUrl + '?' + params.toString();
         
-        // Create callback function
-        window.kgCallback = function(response) {
-          console.log('Search data logged successfully:', response);
-        };
-        
-        // Use image load to trigger the request
+        // Use image to trigger the request (bypasses CORS)
         img.onload = function() {
           console.log('Search data sent successfully');
         };
@@ -340,7 +335,11 @@
         };
         
         // Trigger the request
-        img.src = webAppUrl + '?' + params.toString();
+        img.src = trackingUrl;
+        
+        // Also log the data locally for debugging
+        console.log('Sending search data:', searchData);
+        console.log('Tracking URL:', trackingUrl);
         
       } else {
         console.log('Google Apps Script URL not configured. Search data:', searchData);
