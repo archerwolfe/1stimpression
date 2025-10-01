@@ -293,13 +293,9 @@
       
       // Get country from language/locale and timezone
       var country = 'Unknown';
-      console.log('Browser language detected:', language); // Debug log
       
       // Get timezone for better country detection
       var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-      console.log('Browser timezone detected:', timezone); // Debug log
-      console.log('Timezone type:', typeof timezone); // Debug log
-      console.log('Timezone length:', timezone ? timezone.length : 'null'); // Debug log
       
       // Try timezone-based country detection first (more accurate)
       var timezoneCountryMap = {
@@ -339,20 +335,12 @@
       
       if (timezone && timezoneCountryMap[timezone]) {
         country = timezoneCountryMap[timezone];
-        console.log('Country detected from timezone:', country);
-      } else {
-        console.log('Timezone not found in map. Timezone:', timezone);
-        console.log('Available timezone keys:', Object.keys(timezoneCountryMap).slice(0, 10)); // Show first 10 keys
-      }
-      
-      if (country === 'Unknown' && language) {
+      } else if (language) {
         // Fallback to language-based detection
         var localeParts = language.split('-');
-        console.log('Language parts:', localeParts); // Debug log
         
         if (localeParts.length > 1) {
           var countryCode = localeParts[1];
-          console.log('Country code:', countryCode); // Debug log
           
           // Convert country code to country name
           var countryMap = {
@@ -376,11 +364,9 @@
             'LB': 'Lebanon', 'SY': 'Syria', 'IQ': 'Iraq', 'IR': 'Iran', 'AF': 'Afghanistan'
           };
           country = countryMap[countryCode] || 'Unknown';
-          console.log('Detected country from language:', country); // Debug log
         } else {
           // Try to detect from just the language part
           var langCode = localeParts[0];
-          console.log('Language code only:', langCode); // Debug log
           
           // Map common language codes to likely countries
           var langCountryMap = {
@@ -389,11 +375,8 @@
             'ko': 'South Korea', 'zh': 'China', 'ar': 'Saudi Arabia', 'hi': 'India'
           };
           country = langCountryMap[langCode] || 'Unknown';
-          console.log('Language-based country:', country); // Debug log
         }
       }
-      
-      console.log('Final detected country:', country); // Debug log
       
       // Prepare search data
       var searchData = {
@@ -432,19 +415,15 @@
         
         // Use image to trigger the request (bypasses CORS)
         img.onload = function() {
-          console.log('Search data sent successfully');
+          // Search data sent successfully
         };
         
         img.onerror = function() {
-          console.log('Error sending search data');
+          // Error sending search data
         };
         
         // Trigger the request
         img.src = trackingUrl;
-        
-        // Also log the data locally for debugging
-        console.log('Sending search data:', searchData);
-        console.log('Tracking URL:', trackingUrl);
         
       } else {
         console.log('Google Apps Script URL not configured. Search data:', searchData);
@@ -466,7 +445,6 @@
   // Handle search functionality
   function handleSearch() {
     var q = (queryInput.value || '').trim();
-    console.log('Searching for:', q); // Debug log
     if (q) {
       searchKG(q);
       showResults();
