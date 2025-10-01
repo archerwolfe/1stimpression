@@ -30,10 +30,11 @@ function doPost(e) {
     const spreadsheetId = '1JY01Ka3QJMw2HDmo6UFSxsbq1f-02amr48NlJDIFdF4';
     const sheet = SpreadsheetApp.openById(spreadsheetId).getActiveSheet();
     
-    // Get IP address from the request - for GET requests, we need to get it differently
-    let ipAddress = '';
+    // For GET requests, we can't easily get the real IP address
+    // So we'll use a placeholder and try to get location from user agent
+    let ipAddress = 'Unknown';
     
-    // Try to get IP from various sources
+    // Try to get IP from various sources (usually won't work for GET requests)
     if (e.parameter.ip) {
       ipAddress = e.parameter.ip;
     } else if (e.parameter.remote_addr) {
@@ -44,9 +45,6 @@ function doPost(e) {
       ipAddress = e.parameter['X-Real-IP'];
     } else if (data.ipAddress) {
       ipAddress = data.ipAddress;
-    } else {
-      // For GET requests, we can't easily get the real IP, so we'll use a placeholder
-      ipAddress = 'Unknown';
     }
     
     // Get location data from IP
@@ -261,12 +259,13 @@ function logToSpreadsheet(data) {
 
 // Get location data from IP address using ipapi.co (free service)
 function getLocationFromIP(ipAddress) {
-  if (!ipAddress || ipAddress === '127.0.0.1' || ipAddress === 'localhost') {
+  if (!ipAddress || ipAddress === '127.0.0.1' || ipAddress === 'localhost' || ipAddress === 'Unknown') {
+    // Since we can't get real IP from GET requests, return placeholder data
     return {
-      country: 'Unknown',
-      region: 'Unknown',
-      city: 'Unknown',
-      timezone: 'Unknown'
+      country: 'Web User',
+      region: 'Online',
+      city: 'Internet',
+      timezone: 'UTC'
     };
   }
   
@@ -308,11 +307,12 @@ function getLocationFromIP(ipAddress) {
     console.log('Error fetching location data from ip-api.com:', error);
   }
   
+  // Final fallback
   return {
-    country: 'Unknown',
-    region: 'Unknown',
-    city: 'Unknown',
-    timezone: 'Unknown'
+    country: 'Web User',
+    region: 'Online',
+    city: 'Internet',
+    timezone: 'UTC'
   };
 }
 
