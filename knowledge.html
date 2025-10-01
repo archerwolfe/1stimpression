@@ -27,6 +27,31 @@
       background-color: transparent !important;
     }
     
+    /* Force remove any white overlays or backgrounds */
+    html body.body,
+    html body.body div,
+    html body.body section,
+    html body.body article,
+    html body.body main,
+    html body.body .container,
+    html body.body .w-container {
+      background: transparent !important;
+      background-color: transparent !important;
+      background-image: none !important;
+    }
+    
+    /* Force all elements to be visible and remove any overlays */
+    html body.body * {
+      background: transparent !important;
+      background-color: transparent !important;
+      background-image: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      display: block !important;
+      z-index: 9999 !important;
+      position: relative !important;
+    }
+    
     /* Force all sections to be visible and remove any overlays */
     html body.body .hero-section,
     html body.body .content-section,
@@ -57,6 +82,39 @@
     html body.body .footer * {
       z-index: 10000 !important;
       position: relative !important;
+    }
+    
+    /* Remove any potential white overlays from Webflow */
+    html body.body .w-layout-block,
+    html body.body .w-layout-cell,
+    html body.body .w-layout-grid,
+    html body.body .w-layout-hflex,
+    html body.body .w-layout-vflex {
+      background: transparent !important;
+      background-color: transparent !important;
+      background-image: none !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      z-index: 1 !important;
+    }
+    
+    /* Force all text and content to be visible */
+    html body.body h1,
+    html body.body h2,
+    html body.body h3,
+    html body.body p,
+    html body.body div,
+    html body.body span,
+    html body.body a,
+    html body.body button,
+    html body.body input {
+      background: transparent !important;
+      background-color: transparent !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      z-index: 10000 !important;
+      position: relative !important;
+      color: inherit !important;
     }
     
     /* Force display of all sections */
@@ -1092,6 +1150,26 @@
       TRACKING_URL: "https://script.google.com/macros/s/AKfycbzvpoh5VvKen77gHAtZvYonAQtHCs5Gu4ehyt7dgPZpZbndZsudOxDmh2O0dsDiKPs/exec"
     };
     
+    // Immediate function to remove white overlays
+    (function() {
+      // Remove white overlays immediately
+      document.body.style.background = 'transparent';
+      document.body.style.backgroundColor = 'transparent';
+      document.body.style.backgroundImage = 'none';
+      
+      // Remove white backgrounds from all elements immediately
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach(el => {
+        el.style.background = 'transparent';
+        el.style.backgroundColor = 'transparent';
+        el.style.backgroundImage = 'none';
+        el.style.opacity = '1';
+        el.style.visibility = 'visible';
+        el.style.zIndex = '9999';
+        el.style.position = 'relative';
+      });
+    })();
+    
     // Mobile-specific enhancements and force mobile layout
     document.addEventListener('DOMContentLoaded', function() {
       // Force mobile layout on mobile devices
@@ -1102,14 +1180,31 @@
           // Remove any white overlays or backgrounds
           document.body.style.background = 'transparent';
           document.body.style.backgroundColor = 'transparent';
+          document.body.style.backgroundImage = 'none';
           
           // Remove white backgrounds from all elements
           const allElements = document.querySelectorAll('*');
           allElements.forEach(el => {
             el.style.background = 'transparent';
             el.style.backgroundColor = 'transparent';
+            el.style.backgroundImage = 'none';
             el.style.zIndex = '9999';
             el.style.position = 'relative';
+            el.style.opacity = '1';
+            el.style.visibility = 'visible';
+            el.style.display = 'block';
+          });
+          
+          // Force remove any white overlays from specific containers
+          const containers = document.querySelectorAll('.container, .w-container, div, section, article, main');
+          containers.forEach(container => {
+            container.style.background = 'transparent';
+            container.style.backgroundColor = 'transparent';
+            container.style.backgroundImage = 'none';
+            container.style.opacity = '1';
+            container.style.visibility = 'visible';
+            container.style.zIndex = '9999';
+            container.style.position = 'relative';
           });
           
           // Force display of all sections
