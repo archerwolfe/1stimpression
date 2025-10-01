@@ -306,7 +306,7 @@
       };
 
       // Send data to Google Apps Script
-      var webAppUrl = (window.KG_CONFIG && window.KG_CONFIG.TRACKING_URL) || 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE';
+      var webAppUrl = (window.KG_CONFIG && window.KG_CONFIG.TRACKING_URL) || 'https://script.google.com/macros/s/AKfycbzvpoh5VvKen77gHAtZvYonAQtHCs5Gu4ehyt7dgPZpZbndZsudOxDmh2O0dsDiKPs/exec';
       
       if (webAppUrl && webAppUrl !== 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL_HERE') {
         fetch(webAppUrl, {
