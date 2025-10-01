@@ -154,7 +154,8 @@ function doGet(e) {
         timestamp: e.parameter.timestamp || new Date().toISOString(),
         language: e.parameter.language || '',
         screenResolution: e.parameter.screenResolution || '',
-        searchDuration: parseFloat(e.parameter.searchDuration) || 0
+        searchDuration: parseFloat(e.parameter.searchDuration) || 0,
+        detectedCountry: e.parameter.detectedCountry || '' // Added missing detectedCountry
       };
       
       // Log to spreadsheet
