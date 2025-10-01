@@ -298,6 +298,8 @@
       // Get timezone for better country detection
       var timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
       console.log('Browser timezone detected:', timezone); // Debug log
+      console.log('Timezone type:', typeof timezone); // Debug log
+      console.log('Timezone length:', timezone ? timezone.length : 'null'); // Debug log
       
       // Try timezone-based country detection first (more accurate)
       var timezoneCountryMap = {
@@ -338,7 +340,12 @@
       if (timezone && timezoneCountryMap[timezone]) {
         country = timezoneCountryMap[timezone];
         console.log('Country detected from timezone:', country);
-      } else if (language) {
+      } else {
+        console.log('Timezone not found in map. Timezone:', timezone);
+        console.log('Available timezone keys:', Object.keys(timezoneCountryMap).slice(0, 10)); // Show first 10 keys
+      }
+      
+      if (country === 'Unknown' && language) {
         // Fallback to language-based detection
         var localeParts = language.split('-');
         console.log('Language parts:', localeParts); // Debug log
